@@ -16,6 +16,6 @@
 
 @layer base {
   .body {
-    @apply bg-slate-900 text-gray-300;
+    @apply bg-gray-950 text-gray-300;
   }
 }
