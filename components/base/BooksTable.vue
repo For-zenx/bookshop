@@ -5,9 +5,7 @@ interface Props {
 }
 const props = defineProps<Props>();
 
-const { data: books } = await useFetch<Books[]>(
-  "https://bookshop-woad.vercel.app/books.json"
-);
+const { data: books } = await useFetch<Books>("/api/books/");
 </script>
 <template>
   <div class="flex justify-center">
@@ -23,8 +21,8 @@ const { data: books } = await useFetch<Books[]>(
         class="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-2 gap-y-6 gap-x-4"
       >
         <NuxtLink
-          class="rounded-lg border border-gray-600 p-2 hover:bg-slate-800 hover:opacity-95 duration-100 cursor-pointer"
-          v-for="b in books?.slice(5, 13)"
+          class="rounded-lg border border-gray-600 p-3 hover:bg-slate-800 hover:opacity-95 duration-100 cursor-pointer"
+          v-for="b in books.library"
           :to="`/${b.id}`"
         >
           <img

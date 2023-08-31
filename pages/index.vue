@@ -17,6 +17,6 @@ definePageMeta({
 <template>
   <main class="body">
     <BaseTitle title="bookshop online" />
-    <BaseBooks title="Books Section" />
+    <BaseBooksTable title="Books Section" />
   </main>
 </template>

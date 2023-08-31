@@ -1,4 +1,4 @@
-type Books = {
+type Book = {
   title: string;
   pages: number;
   genre: string;
@@ -11,5 +11,9 @@ type Books = {
     name: string;
     otherBooks: string[];
   };
+};
+
+type Books = {
+  library: Book[];
 };
 export default Books;
