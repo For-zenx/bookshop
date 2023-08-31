@@ -28,8 +28,10 @@ const { data: books } = await useFetch<Books[]>(
         >
           <img
             v-bind:src="b.cover"
-            class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px] tooltip"
-            data-tip="{{b.title}}"
+            class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px]"
+            height="300"
+            width="300"
+            :alt="b.title"
           />
 
           <h3 class="font-semibold line-clamp-1 hover:underline mt-2">
