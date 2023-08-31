@@ -23,7 +23,7 @@ const { data: books } = await useFetch<Books[]>(
         class="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-2 gap-y-6 gap-x-4"
       >
         <NuxtLink
-          class="rounded-lg border border-gray-600 p-3 hover:bg-slate-800 hover:opacity-95 duration-100 cursor-pointer"
+          class="rounded-lg border border-gray-600 p-2 hover:bg-slate-800 hover:opacity-95 duration-100 cursor-pointer"
           v-for="b in books?.slice(5, 13)"
           :to="`/${b.id}`"
         >
