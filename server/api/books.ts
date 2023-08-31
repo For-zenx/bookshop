@@ -222,6 +222,6 @@ export default defineEventHandler(() => {
           otherBooks: ["El horror de Dunwich", "En las montañas de la locura"],
         },
       },
-    ];
-  }
+    ],
+  };
 });
