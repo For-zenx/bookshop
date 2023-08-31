@@ -6,7 +6,7 @@ type Books = {
   synopsis: string;
   year: number;
   ISBN: string;
-  link: string;
+  id: string;
   author: {
     name: string;
     otherBooks: string[];

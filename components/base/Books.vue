@@ -22,9 +22,10 @@ const { data: books } = await useFetch<Books[]>(
       <section
         class="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-2 gap-y-6 gap-x-4"
       >
-        <div
+        <NuxtLink
           class="rounded-lg border border-gray-600 p-3 hover:bg-slate-800 hover:opacity-95 duration-100 cursor-pointer"
           v-for="b in books?.slice(5, 13)"
+          :to="`/${b.id}`"
         >
           <img
             v-bind:src="b.cover"
@@ -52,7 +53,7 @@ const { data: books } = await useFetch<Books[]>(
           >
             Páginas: {{ b.pages }}
           </p>
-        </div>
+        </NuxtLink>
       </section>
     </div>
   </div>
