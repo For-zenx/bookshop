@@ -55,7 +55,7 @@ const goForward = () => {
             :alt="book.title"
             height="300"
             width="350"
-            class="min-h-[480px] max-h-[480px] mr-12"
+            class="min-h-[420px] max-h-[420px] lg:min-h-[480px] lg:max-h-[480px] mr-12"
           />
 
           <div class="grid grid-rows-9">
@@ -64,33 +64,33 @@ const goForward = () => {
             >
               {{ book.title }}
             </h2>
-            <div class="mt-2 lg:mt-8 text-lg font-mono">
+            <div class="mt-3 lg:mt-8 text-lg font-mono">
               Sinopsis: {{ book.synopsis }}
             </div>
-            <div class="mt-2 lg:mt-6 font-mono font-bold">
+            <div class="mt-4 lg:mt-6 font-mono font-bold">
               Autor: <span class="font-normal">{{ book.author.name }}</span>
             </div>
 
-            <div class="mt-2 font-mono font-bold">
+            <div class="mt-3 font-mono font-bold">
               Páginas: <span class="font-normal">{{ book.pages }}</span>
             </div>
-            <div class="mt-2 font-mono font-bold">
+            <div class="mt-3 font-mono font-bold">
               Género: <span class="font-normal">{{ book.genre }}</span>
             </div>
-            <div class="mt-2 font-mono font-bold">
+            <div class="mt-3 font-mono font-bold">
               Año: <span class="font-normal">{{ book.year }}</span>
             </div>
-            <div class="mt-2 font-mono font-bold">
+            <div class="mt-3 font-mono font-bold">
               ISBN: <span class="font-normal">{{ book.ISBN }}</span>
             </div>
             <div
-              class="mt-2 lg:mt-6 font-mono"
+              class="mt-4 lg:mt-6 font-mono"
               v-if="book.author.otherBooks.length !== 0"
             >
               Libros Relacionados: {{ book.author.otherBooks[0] }}.
               {{ book.author.otherBooks[1] }}
             </div>
-            <div class="mt-2 lg:mt-6 font-mono" v-else>
+            <div class="mt-4 lg:mt-6 font-mono" v-else>
               Libros Relacionados: No hay coincidencias
             </div>
             <div class="flex justify-center mt-14 lg:mt-8 lg:justify-end mr-8">
