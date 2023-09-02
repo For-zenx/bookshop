@@ -1,3 +1,37 @@
+<script setup lang="ts">
+import { Books } from "~/types";
+
+const { data: books } = await useFetch<Books>("/api/books/");
+
+const { id } = useRoute().params;
+
+const router = useRouter();
+
+const route = useRoute();
+
+const isFirstPage = () => Number(id) === 1;
+const isLastPage = () => {
+  const arrayNumber = String(books.value?.library.length);
+  return arrayNumber === route.params.id;
+};
+
+const goToHome = () => {
+  router.push("/");
+};
+
+const goBack = () => {
+  if (!isFirstPage()) {
+    router.push(`/${Number(id) - 1}`);
+  }
+};
+
+const goForward = () => {
+  if (!isLastPage()) {
+    router.push(`/${Number(id) + 1}`);
+  }
+};
+</script>
+
 <template>
   <section class="flex justify-center">
     <div
@@ -9,9 +43,9 @@
         width="40"
         height="40"
         class="mb-2 p-1 cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50 hover:text-gray-800"
-        @click="router.push('/')"
+        @click="goToHome()"
       />
-      <main v-for="book in books.library">
+      <main v-for="book in books?.library">
         <div v-if="id === book.id" class="grid grid-cols-1 md:flex">
           <img
             :src="book.cover"
@@ -30,11 +64,22 @@
             <div class="mt-8 text-lg font-mono">
               Sinopsis: {{ book.synopsis }}
             </div>
-            <div class="mt-6 font-mono">Autor: {{ book.author.name }}</div>
-            <div class="mt-2 font-mono">Páginas: {{ book.pages }}</div>
-            <div class="mt-2 font-mono">Género: {{ book.genre }}</div>
-            <div class="mt-2 font-mono">Año: {{ book.year }}</div>
-            <div class="mt-2 font-mono">ISBN: {{ book.ISBN }}</div>
+            <div class="mt-6 font-mono font-bold">
+              Autor: <span class="font-normal">{{ book.author.name }}</span>
+            </div>
+
+            <div class="mt-2 font-mono font-bold">
+              Páginas: <span class="font-normal">{{ book.pages }}</span>
+            </div>
+            <div class="mt-2 font-mono font-bold">
+              Género: <span class="font-normal">{{ book.genre }}</span>
+            </div>
+            <div class="mt-2 font-mono font-bold">
+              Año: <span class="font-normal">{{ book.year }}</span>
+            </div>
+            <div class="mt-2 font-mono font-bold">
+              ISBN: <span class="font-normal">{{ book.ISBN }}</span>
+            </div>
             <div
               class="mt-6 font-mono"
               v-if="book.author.otherBooks.length !== 0"
@@ -52,11 +97,7 @@
                 height="45"
                 alt="angle left"
                 class="mr-4 pr-0.5 cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50"
-                :class="
-                  route.fullPath === '/1'
-                    ? ['opacity-20 cursor-not-allowed']
-                    : ''
-                "
+                :class="isFirstPage() ? 'opacity-20 cursor-not-allowed' : ''"
                 @click="goBack()"
               />
               <img
@@ -65,11 +106,7 @@
                 height="45"
                 alt="angle right"
                 class="pl-0.5 cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50"
-                :class="
-                  route.fullPath === '/13'
-                    ? ['opacity-20 cursor-not-allowed']
-                    : ''
-                "
+                :class="isLastPage() ? 'opacity-20 cursor-not-allowed' : ''"
                 @click="goForward()"
               />
             </div>
@@ -79,29 +116,3 @@
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-import { Books } from "~/types";
-
-const { data: books } = await useFetch<Books>("/api/books/");
-
-const { id } = useRoute().params;
-
-const router = useRouter();
-
-const route = useRoute();
-
-const goBack = () => {
-  const currentId = Number(route.params.id);
-  if (currentId > 1) {
-    router.push(`/${currentId - 1}`);
-  }
-};
-
-const goForward = () => {
-  const currentId = Number(route.params.id);
-  if (currentId < 13) {
-    router.push(`/${currentId + 1}`);
-  }
-};
-</script>

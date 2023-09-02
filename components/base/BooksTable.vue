@@ -19,7 +19,7 @@ const { data: books } = await useFetch<Books>("/api/books/");
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
         <NuxtLink
           class="rounded-lg border border-gray-600 p-3 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
-          v-for="b in books.library"
+          v-for="b in books?.library"
           :key="b.id"
           :to="`/${b.id}`"
         >

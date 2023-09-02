@@ -1,16 +1,26 @@
 <script setup lang="ts">
-useHead({
-  title: "",
-  meta: [
-    {
-      hid: "page-index",
-      name: "page-index",
-      content: "My custom description",
-    },
-  ],
+import { useRoute } from "vue-router";
+import { Books } from "~/types";
+const route = useRoute();
+
+const { data: books } = await useFetch<Books>("/api/books/");
+
+const lastId = () => {
+  const arrayNumber = String(books.value?.library.length);
+  return arrayNumber === route.params.id;
+};
+
+const bookInfo = books.value?.library.find((book) => {
+  return book.id === route.params.id;
 });
-definePageMeta({
-  layout: "default",
+
+const headerTitle = bookInfo?.title;
+
+useHead(() => {
+  return {
+    title: headerTitle,
+    meta: [{ property: "og:title", content: headerTitle }],
+  };
 });
 </script>
 

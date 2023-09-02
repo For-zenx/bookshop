@@ -1,7 +1,7 @@
 import { Title } from '../.nuxt/components';
 <script lang="ts" setup>
 useHead({
-  title: "home",
+  title: "Bookshop Online",
   meta: [
     {
       hid: "page-index",
