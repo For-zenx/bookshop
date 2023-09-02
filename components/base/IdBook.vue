@@ -35,18 +35,21 @@ const goForward = () => {
 <template>
   <section class="flex justify-center">
     <div
-      class="max-w-5xl px-2 md:px-4 lg:px-8 pt-6 pb-12 mt-12 rounded-lg bg-gradient-to-br bg-slate-900"
+      class="max-w-5xl px-2 md:px-4 lg:px-8 pt-6 pb-12 mt-12 rounded-lg bg-gradient-to-br bg-slate-900 mx-2"
     >
       <img
         src="/svg/arrow-return-left.svg"
         alt="arrow return left"
         width="40"
         height="40"
-        class="mb-2 p-1 cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50 hover:text-gray-800"
+        class="mb-2 p-1 mx-3 lg:mx-0 cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50 hover:text-gray-800"
         @click="goToHome()"
       />
       <main v-for="book in books?.library">
-        <div v-if="id === book.id" class="grid grid-cols-1 md:flex">
+        <div
+          v-if="id === book.id"
+          class="grid grid-cols-1 max-w-lg px-4 lg:max-w-max lg:flex lg:px-0"
+        >
           <img
             :src="book.cover"
             :alt="book.title"
@@ -57,14 +60,14 @@ const goForward = () => {
 
           <div class="grid grid-rows-9">
             <h2
-              class="uppercase text-gray-300 text-xl md:text-2xl font-bold mb-4"
+              class="uppercase text-gray-300 text-2xl font-bold mb-4 mt-8 lg:mt-0"
             >
               {{ book.title }}
             </h2>
-            <div class="mt-8 text-lg font-mono">
+            <div class="mt-2 lg:mt-8 text-lg font-mono">
               Sinopsis: {{ book.synopsis }}
             </div>
-            <div class="mt-6 font-mono font-bold">
+            <div class="mt-2 lg:mt-6 font-mono font-bold">
               Autor: <span class="font-normal">{{ book.author.name }}</span>
             </div>
 
@@ -81,16 +84,16 @@ const goForward = () => {
               ISBN: <span class="font-normal">{{ book.ISBN }}</span>
             </div>
             <div
-              class="mt-6 font-mono"
+              class="mt-2 lg:mt-6 font-mono"
               v-if="book.author.otherBooks.length !== 0"
             >
               Libros Relacionados: {{ book.author.otherBooks[0] }}.
               {{ book.author.otherBooks[1] }}
             </div>
-            <div class="mt-6 font-mono" v-else>
+            <div class="mt-2 lg:mt-6 font-mono" v-else>
               Libros Relacionados: No hay coincidencias
             </div>
-            <div class="flex justify-end mt-8 mr-8">
+            <div class="flex justify-center mt-14 lg:mt-8 lg:justify-end mr-8">
               <img
                 src="/svg/angle-left.svg"
                 width="45"
