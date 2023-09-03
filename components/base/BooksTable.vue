@@ -25,7 +25,7 @@ const { data: books } = await useFetch<Books>("/api/books/");
           :key="b.id"
           :to="`/${b.id}`"
         >
-          <img
+          <nuxt-img
             :src="b.cover"
             class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px]"
             height="300"
