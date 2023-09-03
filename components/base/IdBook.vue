@@ -11,8 +11,8 @@ const route = useRoute();
 
 const isFirstPage = () => Number(id) === 1;
 const isLastPage = () => {
-  const arrayNumber = String(books.value?.library.length);
-  return arrayNumber === route.params.id;
+  const currentId = Number(route.params.id);
+  return currentId === books.value?.library.length;
 };
 
 const goToHome = () => {

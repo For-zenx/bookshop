@@ -5,11 +5,6 @@ const route = useRoute();
 
 const { data: books } = await useFetch<Books>("/api/books/");
 
-const lastId = () => {
-  const arrayNumber = String(books.value?.library.length);
-  return arrayNumber === route.params.id;
-};
-
 const bookInfo = books.value?.library.find((book) => {
   return book.id === route.params.id;
 });

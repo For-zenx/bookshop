@@ -8,17 +8,19 @@ const { data: books } = await useFetch<Books>("/api/books/");
 <template>
   <div class="flex justify-center">
     <div
-      class="max-w-6xl px-2 md:px-4 lg:px-8 py-12 mt-12 rounded-lg bg-slate-900"
+      class="max-w-6xl px-2 md:px-4 lg:px-8 py-12 mt-12 rounded-lg bg-slate-900 mx-1"
     >
       <img src="" alt="" />
       <header>
-        <h2 class="uppercase text-gray-300 text-2xl md:text-3xl font-bold mb-8">
+        <h2
+          class="uppercase text-gray-300 text-2xl md:text-3xl font-bold mb-8 text-center md:text-left"
+        >
           {{ title }}
         </h2>
       </header>
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
         <NuxtLink
-          class="rounded-lg border border-gray-600 p-3 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
+          class="rounded-lg border border-gray-600 p-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
           v-for="b in books?.library"
           :key="b.id"
           :to="`/${b.id}`"

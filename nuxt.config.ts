@@ -13,7 +13,6 @@ export default defineNuxtConfig({
         { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
         { charset: "utf-8" },
         { hid: "keyword", name: "keyword", content: "yoyo" },
-        { hid: "description", name: "description", content: "2M&B project" },
       ],
     },
   },
