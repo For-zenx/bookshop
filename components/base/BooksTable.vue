@@ -10,7 +10,6 @@ const { data: books } = await useFetch<Books>("/api/books/");
     <div
       class="max-w-6xl px-2 md:px-4 lg:px-8 py-12 mt-12 rounded-lg bg-slate-900 mx-1"
     >
-      <img src="" alt="" />
       <header>
         <h2
           class="uppercase text-gray-300 text-2xl md:text-3xl font-bold mb-8 text-center md:text-left"
