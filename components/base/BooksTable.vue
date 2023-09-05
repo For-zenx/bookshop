@@ -19,12 +19,16 @@ if (books.value) {
 
 const handleMinPageInput = () => {
   minPageInput.value > maxPagesArray ? (minPageInput.value = maxPagesArray) : 1;
+
+  minPageInput.value < 0 ? (minPageInput.value = 1) : "";
 };
 
 const handleMaxPageInput = () => {
   maxPageInput.value > maxPagesArray
     ? (maxPageInput.value = maxPagesArray)
     : maxPagesArray;
+
+  maxPageInput.value < 0 ? (maxPageInput.value = maxPagesArray) : "";
 };
 
 const bookList = computed(() => {
@@ -53,7 +57,7 @@ const bookList = computed(() => {
 <template>
   <div class="flex justify-center">
     <div
-      class="max-w-6xl px-2 md:px-4 lg:px-8 py-12 mt-12 rounded-lg bg-slate-900 mx-1"
+      class="max-w-6xl px-2 md:px-4 lg:px-8 py-12 mt-12 rounded-lg bg-slate-900 mx-1 sm:mx-12 md:mx-1"
     >
       <header>
         <h2
