@@ -5,50 +5,49 @@ const { title } = defineProps<{ title: string }>();
 
 const { data: books } = await useFetch<Books>("/api/books/");
 
-const minPageInput = ref("");
-const maxPageInput = ref("");
+const minPageInput = ref();
+const maxPageInput = ref();
 
-let maxPagesArray = books.value?.library.reduce((maxPages, item) => {
-  return Math.max(maxPages, item.pages);
-}, 0);
+let maxPagesArray: number = 0;
 
-const handleMinAgeInput = () => {
-  if (parseInt(minPageInput.value, 10) < 0) {
-    minPageInput.value = "1";
-  }
-  if (parseInt(minPageInput.value, 10) > Number(maxPagesArray)) {
-    minPageInput.value = String(maxPagesArray);
-  }
+if (books.value) {
+  maxPagesArray = books.value.library.reduce(
+    (maxPages, item) => Math.max(maxPages, item.pages),
+    0
+  );
+}
+
+const handleMinPageInput = () => {
+  minPageInput.value > maxPagesArray ? (minPageInput.value = maxPagesArray) : 1;
 };
 
-const handleMaxAgeInput = () => {
-  if (parseInt(maxPageInput.value, 10) < 0) {
-    maxPageInput.value = "1";
-  }
-  if (parseInt(maxPageInput.value, 10) > Number(maxPagesArray)) {
-    maxPageInput.value = String(maxPagesArray);
-  }
+const handleMaxPageInput = () => {
+  maxPageInput.value > maxPagesArray
+    ? (maxPageInput.value = maxPagesArray)
+    : maxPagesArray;
 };
 
 const bookList = computed(() => {
-  const filteredBooks = books.value?.library.filter((book) => {
-    const page = book.pages;
-    const minPage = parseInt(minPageInput.value, 10);
-    const maxPage = parseInt(maxPageInput.value, 10);
+  const minPage = minPageInput.value;
+  const maxPage = maxPageInput.value;
 
-    if (!isNaN(minPage) && !isNaN(maxPage)) {
+  return books.value?.library.filter((book) => {
+    const page = book.pages;
+
+    if (minPage && maxPage) {
       return page >= minPage && page <= maxPage;
     }
 
-    if (!isNaN(minPage)) {
+    if (minPage) {
       return page >= minPage;
     }
-    if (!isNaN(maxPage)) {
+
+    if (maxPage) {
       return page <= maxPage;
     }
+
     return true;
   });
-  return filteredBooks;
 });
 </script>
 <template>
@@ -72,7 +71,7 @@ const bookList = computed(() => {
           placeholder="1"
           type="number"
           v-model="minPageInput"
-          @input="handleMinAgeInput"
+          @input="handleMinPageInput"
         />
         Max:
         <input
@@ -80,7 +79,7 @@ const bookList = computed(() => {
           :placeholder="`${maxPagesArray}`"
           type="number"
           v-model="maxPageInput"
-          @input="handleMaxAgeInput"
+          @input="handleMaxPageInput"
         />
       </div>
 
