@@ -85,7 +85,7 @@ const bookList = computed(() => {
 
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
         <NuxtLink
-          class="rounded-lg border border-gray-600 p-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
+          class="rounded-lg border border-gray-600 pb-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
           v-for="book in bookList"
           :key="book.id"
           :to="`/${book.id}`"
@@ -93,27 +93,27 @@ const bookList = computed(() => {
         >
           <nuxt-img
             :src="book.cover"
-            class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px]"
+            class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px] rounded-t-lg"
             height="300"
             width="300"
             :alt="book.title"
           />
 
-          <h3 class="font-semibold line-clamp-1 hover:underline mt-2">
+          <h3 class="font-semibold line-clamp-1 hover:underline mt-2 pl-1">
             {{ book.title }}
           </h3>
           <p
-            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1"
+            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1"
           >
             Autor: {{ book.author.name }}
           </p>
           <p
-            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1"
+            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1"
           >
             Género: {{ book.genre }}
           </p>
           <p
-            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 italic"
+            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 italic pl-1"
           >
             Páginas: {{ book.pages }}
           </p>
