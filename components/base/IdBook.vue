@@ -45,7 +45,7 @@ const goForward = () => {
         class="mb-2 p-1 mx-3 lg:mx-0 cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50 hover:text-gray-800"
         @click="goToHome()"
       />
-      <main v-for="book in books?.library">
+      <div v-for="book in books?.library">
         <div
           v-if="id === book.id"
           class="grid grid-cols-1 max-w-lg px-4 lg:max-w-max lg:flex lg:px-0"
@@ -115,7 +115,7 @@ const goForward = () => {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   </section>
 </template>

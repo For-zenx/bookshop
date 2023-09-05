@@ -4,6 +4,52 @@ import { Books } from "~/types";
 const { title } = defineProps<{ title: string }>();
 
 const { data: books } = await useFetch<Books>("/api/books/");
+
+const minPageInput = ref("");
+const maxPageInput = ref("");
+
+let maxPagesArray = books.value?.library.reduce((maxPages, item) => {
+  return Math.max(maxPages, item.pages);
+}, 0);
+
+const handleMinAgeInput = () => {
+  if (parseInt(minPageInput.value, 10) < 0) {
+    minPageInput.value = "1";
+  }
+  if (parseInt(minPageInput.value, 10) > Number(maxPagesArray)) {
+    minPageInput.value = String(maxPagesArray);
+  }
+};
+
+const handleMaxAgeInput = () => {
+  if (parseInt(maxPageInput.value, 10) < 0) {
+    maxPageInput.value = "1";
+  }
+  if (parseInt(maxPageInput.value, 10) > Number(maxPagesArray)) {
+    maxPageInput.value = String(maxPagesArray);
+  }
+};
+
+const bookList = computed(() => {
+  const filteredBooks = books.value?.library.filter((book) => {
+    const page = book.pages;
+    const minPage = parseInt(minPageInput.value, 10);
+    const maxPage = parseInt(maxPageInput.value, 10);
+
+    if (!isNaN(minPage) && !isNaN(maxPage)) {
+      return page >= minPage && page <= maxPage;
+    }
+
+    if (!isNaN(minPage)) {
+      return page >= minPage;
+    }
+    if (!isNaN(maxPage)) {
+      return page <= maxPage;
+    }
+    return true;
+  });
+  return filteredBooks;
+});
 </script>
 <template>
   <div class="flex justify-center">
@@ -12,46 +58,82 @@ const { data: books } = await useFetch<Books>("/api/books/");
     >
       <header>
         <h2
-          class="uppercase text-gray-300 text-2xl md:text-3xl font-bold mb-8 text-center md:text-left"
+          class="uppercase text-gray-300 text-2xl md:text-3xl font-bold mb-2 text-center md:text-left"
         >
           {{ title }}
         </h2>
       </header>
+      <div class="mb-4 text-center md:text-start">
+        <div class="pb-1">Rango de Páginas:</div>
+
+        Min:
+        <input
+          class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500 mr-6"
+          placeholder="1"
+          type="number"
+          v-model="minPageInput"
+          @input="handleMinAgeInput"
+        />
+        Max:
+        <input
+          class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500"
+          :placeholder="`${maxPagesArray}`"
+          type="number"
+          v-model="maxPageInput"
+          @input="handleMaxAgeInput"
+        />
+      </div>
+
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
         <NuxtLink
           class="rounded-lg border border-gray-600 p-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
-          v-for="b in books?.library"
-          :key="b.id"
-          :to="`/${b.id}`"
+          v-for="book in bookList"
+          :key="book.id"
+          :to="`/${book.id}`"
+          v-if="bookList?.length"
         >
           <nuxt-img
-            :src="b.cover"
+            :src="book.cover"
             class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px]"
             height="300"
             width="300"
-            :alt="b.title"
+            :alt="book.title"
           />
 
           <h3 class="font-semibold line-clamp-1 hover:underline mt-2">
-            {{ b.title }}
+            {{ book.title }}
           </h3>
           <p
             class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1"
           >
-            Autor: {{ b.author.name }}
+            Autor: {{ book.author.name }}
           </p>
           <p
             class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1"
           >
-            Género: {{ b.genre }}
+            Género: {{ book.genre }}
           </p>
           <p
             class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 italic"
           >
-            Páginas: {{ b.pages }}
+            Páginas: {{ book.pages }}
           </p>
         </NuxtLink>
+        <div v-else class="col-span-2 md:col-start-2">
+          <h3 class="text-xl text-center md:text-4xl mt-12">
+            No se han encontrado libros
+          </h3>
+          <nuxt-img class="-mt-20 md:-mt-28" src="/svg/book-finder.svg" />
+        </div>
       </section>
     </div>
   </div>
 </template>
+
+<style scoped>
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>
