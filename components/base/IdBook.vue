@@ -33,7 +33,7 @@ const goForward = () => {
 </script>
 
 <template>
-  <section class="flex justify-center">
+  <section class="flex justify-center pb-12 md:pb-0">
     <div
       class="max-w-5xl px-2 md:px-4 lg:px-8 pt-6 pb-12 mt-12 rounded-lg bg-gradient-to-br bg-slate-900 mx-2"
     >
@@ -50,7 +50,7 @@ const goForward = () => {
           v-if="id === book.id"
           class="grid grid-cols-1 max-w-lg px-4 lg:max-w-max lg:flex lg:px-0"
         >
-          <nuxt-img
+          <img
             :src="book.cover"
             :alt="book.title"
             height="300"
