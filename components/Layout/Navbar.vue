@@ -11,11 +11,11 @@ const goToHome = () => {
 <template>
   <nav
     :class="y > 10 ? 'border-b-2 border-slate-800 duration-500' : ''"
-    class="navbar flex justify-between"
+    class="navbar flex justify-between pt-2"
   >
     <img
       src="/svg/cube-navbar.svg"
-      class="w-10 h-10 cursor-pointer"
+      class="w-9 h-9 cursor-pointer"
       @click="goToHome()"
       width="20"
       height="20"

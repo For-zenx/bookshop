@@ -1,5 +1,15 @@
 <script setup lang="ts">
 import { Books } from "~/types";
+import { storeToRefs } from "pinia";
+import { useBookStore } from "~/stores/BookStore";
+
+const bookStore = useBookStore();
+
+const { fetchBook } = bookStore;
+
+const { bookList } = storeToRefs(bookStore);
+
+await fetchBook();
 
 const { data: books } = await useFetch<Books>("/api/books/");
 
@@ -35,7 +45,7 @@ const goForward = () => {
 <template>
   <section class="flex justify-center pb-12 md:pb-0">
     <div
-      class="max-w-5xl px-2 md:px-4 lg:px-8 pt-6 pb-12 mt-12 rounded-lg bg-gradient-to-br bg-slate-900 mx-2"
+      class="max-w-sm lg:max-w-5xl px-2 md:px-4 lg:px-8 pt-6 pb-12 mt-12 rounded-lg bg-slate-900 mx-2"
     >
       <nuxt-img
         src="/svg/arrow-return-left.svg"
@@ -45,7 +55,7 @@ const goForward = () => {
         class="mb-2 p-1 mx-3 lg:mx-0 cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50 hover:text-gray-800"
         @click="goToHome()"
       />
-      <div v-for="book in books?.library">
+      <div v-for="book in bookList">
         <div
           v-if="id === book.id"
           class="grid grid-cols-1 max-w-lg px-4 lg:max-w-max lg:flex lg:px-0"
@@ -59,11 +69,35 @@ const goForward = () => {
           />
 
           <div class="grid grid-rows-9">
-            <h2
-              class="uppercase text-gray-300 text-2xl font-bold mb-4 mt-8 lg:mt-0"
-            >
-              {{ book.title }}
-            </h2>
+            <div class="flex justify-between mt-8 lg:mt-0">
+              <h2 class="uppercase text-gray-300 text-2xl font-bold">
+                {{ book.title }}
+              </h2>
+              <button
+                :class="
+                  book.isFav
+                    ? 'bg-emerald-700 border-black duration-100 lg:duration-300'
+                    : 'bg-transparent border-gray-400 duration-100 lg:duration-300'
+                "
+                class="p-1 border-2 rounded-full duration-500 mb-12 lg:mb-0"
+                @click="bookStore.toggleFav(Number(book.id))"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  :fill="book.isFav ? '#000000' : 'none'"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  :stroke="book.isFav ? '' : '#9ca3af'"
+                  class="w-9 h-9"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  />
+                </svg>
+              </button>
+            </div>
             <div class="mt-3 lg:mt-8 text-lg font-mono">
               Sinopsis: {{ book.synopsis }}
             </div>

@@ -1,5 +1,15 @@
 <script setup lang="ts">
 import { Books } from "~/types";
+import { storeToRefs } from "pinia";
+import { useBookStore } from "~/stores/BookStore";
+
+const bookStore = useBookStore();
+
+const { fetchBook } = bookStore;
+
+const { bookList } = storeToRefs(bookStore);
+
+await fetchBook();
 
 const { title } = defineProps<{ title: string }>();
 
@@ -31,7 +41,7 @@ const handleMaxPageInput = () => {
   maxPageInput.value < 0 ? (maxPageInput.value = maxPagesArray) : Number;
 };
 
-const bookList = computed(() => {
+const allBooks = computed(() => {
   const minPage = minPageInput.value;
   const maxPage = maxPageInput.value;
 
@@ -87,12 +97,12 @@ const bookList = computed(() => {
       </div>
 
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
-        <NuxtLink
+        <div
           class="rounded-lg border border-gray-600 pb-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
-          v-for="book in bookList"
+          v-for="book in allBooks"
           :key="book.id"
           :to="`/${book.id}`"
-          v-if="bookList?.length"
+          v-if="allBooks?.length"
         >
           <nuxt-img
             :src="book.cover"
@@ -120,7 +130,7 @@ const bookList = computed(() => {
           >
             Páginas: {{ book.pages }}
           </p>
-        </NuxtLink>
+        </div>
         <div v-else class="col-span-2 md:col-start-2">
           <h3 class="text-xl text-center md:text-4xl mt-12">
             No se han encontrado libros
