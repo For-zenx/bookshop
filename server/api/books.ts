@@ -16,6 +16,7 @@ export default defineEventHandler((event) => {
           name: "J.R.R. Tolkien",
           otherBooks: ["El Hobbit", "El Silmarillion"],
         },
+        isFav: false,
       },
       {
         title: "Juego de Tronos",
@@ -36,6 +37,7 @@ export default defineEventHandler((event) => {
             "Festín de Cuervos",
           ],
         },
+        isFav: false,
       },
       {
         title: "Harry Potter y la piedra filosofal",
@@ -56,6 +58,7 @@ export default defineEventHandler((event) => {
             "Harry Potter y el cáliz de fuego",
           ],
         },
+        isFav: false,
       },
       {
         title: "1984",
@@ -72,6 +75,7 @@ export default defineEventHandler((event) => {
           name: "George Orwell",
           otherBooks: ["Rebelión en la granja"],
         },
+        isFav: false,
       },
       {
         title: "Apocalipsis Zombie",
@@ -88,6 +92,7 @@ export default defineEventHandler((event) => {
           name: "Manel Loreiro",
           otherBooks: [],
         },
+        isFav: false,
       },
       {
         title: "Dune",
@@ -104,6 +109,7 @@ export default defineEventHandler((event) => {
           name: "Frank Herbert",
           otherBooks: ["El mesías de Dune", "Hijos de Dune"],
         },
+        isFav: false,
       },
       {
         title: "La Guía del Autoestopista Galáctico",
@@ -122,6 +128,7 @@ export default defineEventHandler((event) => {
             "La vida, el universo y todo lo demás",
           ],
         },
+        isFav: false,
       },
       {
         title: "Neuromante",
@@ -138,6 +145,7 @@ export default defineEventHandler((event) => {
           name: "William Gibson",
           otherBooks: ["Conde Cero", "Mona Lisa Acelerada"],
         },
+        isFav: false,
       },
       {
         title: "Fahrenheit 451",
@@ -154,6 +162,7 @@ export default defineEventHandler((event) => {
           name: "Ray Bradbury",
           otherBooks: ["Crónicas marcianas", "El hombre ilustrado"],
         },
+        isFav: false,
       },
       {
         title: "El resplandor",
@@ -170,6 +179,7 @@ export default defineEventHandler((event) => {
           name: "Stephen King",
           otherBooks: ["Carrie", "It"],
         },
+        isFav: false,
       },
       {
         title: "Drácula",
@@ -189,6 +199,7 @@ export default defineEventHandler((event) => {
             "La madriguera del gusano blanco",
           ],
         },
+        isFav: false,
       },
       {
         title: "Frankenstein",
@@ -205,6 +216,7 @@ export default defineEventHandler((event) => {
           name: "Mary Shelley",
           otherBooks: ["El último hombre", "Valperga"],
         },
+        isFav: false,
       },
       {
         title: "La llamada de Cthulhu",
@@ -221,6 +233,7 @@ export default defineEventHandler((event) => {
           name: "H.P. Lovecraft",
           otherBooks: ["El horror de Dunwich", "En las montañas de la locura"],
         },
+        isFav: false,
       },
     ],
   };

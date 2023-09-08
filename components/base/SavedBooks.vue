@@ -46,9 +46,10 @@ const toggleDropDown = () => {
             />
           </svg>
         </p>
-        <div
+        <NuxtLink
           v-for="book in books.library"
           class="p-2 border-b-[1px] border-gray-500 grid grid-cols-12 grid-rows-4"
+          :to="book.id"
         >
           <nuxt-img
             class="col-span-3 row-span-4 min-h-[130px] max-h-[130px]"
@@ -57,7 +58,7 @@ const toggleDropDown = () => {
             width="80"
             height="80"
           />
-          <div class="col-span-8 ml-1 line-clamp-1 p-1">
+          <div class="col-span-8 ml-1 line-clamp-1 p-1 font-bold">
             {{ book.title }}
           </div>
           <svg
@@ -75,16 +76,16 @@ const toggleDropDown = () => {
             />
           </svg>
           <div
-            class="font-bold text-sm underline row-start-2 ml-2 col-start-4 col-span-8"
+            class="text-sm underline row-start-2 ml-2 col-start-4 col-span-8"
           >
             Sinposis:
           </div>
           <div
-            class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400"
+            class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400 line-clamp-3"
           >
             {{ book.synopsis }}
           </div>
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </div>

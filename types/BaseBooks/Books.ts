@@ -11,9 +11,10 @@ type Book = {
     name: string;
     otherBooks: string[];
   };
+  isFav: boolean;
 };
 
 type Books = {
   library: Book[];
 };
-export default Books;
+export type { Book, Books };

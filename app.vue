@@ -1,3 +1,4 @@
+import { ClientOnly } from './.nuxt/components';
 <template>
   <NuxtLayout>
     <NuxtPage />
