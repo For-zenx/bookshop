@@ -1,19 +1,14 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useBookStore } from "~/stores/BookStore";
-
 const router = useRouter();
 
 const bookStore = useBookStore();
-
 const { fetchBook } = bookStore;
-
 const { bookList } = storeToRefs(bookStore);
-
 await fetchBook();
 
 const showDropDown = ref(false);
-
 const toggleDropDown = () => {
   showDropDown.value = !showDropDown.value;
 };
@@ -66,7 +61,7 @@ const toggleDropDown = () => {
         </div>
         <div
           v-else
-          v-for="book in bookStore.favs"
+          v-for="book in shuffledFavs"
           class="p-2 border-b-[1px] border-gray-500 grid grid-cols-12 grid-rows-4 hover:bg-slate-600 hover:bg-opacity-30"
         >
           <nuxt-img
@@ -118,7 +113,7 @@ const toggleDropDown = () => {
       </div>
     </div>
     <span
-      :class="showDropDown ? 'underline mt-2 ml-3 font-bold' : ''"
+      :class="showDropDown ? 'underline mt-2 ml-1 font-bold' : ''"
       class="fixed"
       >{{ bookStore.favCount }}</span
     >

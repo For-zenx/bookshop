@@ -11,7 +11,8 @@ export const useBookStore = defineStore("bookList", {
       return state.bookList.length;
     },
     favs(): Book[] {
-      return this.bookList.filter((book) => book.isFav);
+      const favoriteBooks = this.bookList.filter((book) => book.isFav);
+      return favoriteBooks;
     },
     favCount(): number {
       return this.bookList.reduce((count, book) => {
@@ -34,23 +35,3 @@ export const useBookStore = defineStore("bookList", {
     },
   },
 });
-
-// {
-//         library: [
-//           {
-//             title: "El señor de los anillos",
-//             id: 1,
-//             isFav: false,
-//           },
-//           {
-//             title: "Juego de Tronos",
-//             id: 2,
-//             isFav: false,
-//           },
-//           {
-//             title: "Neuromante",
-//             id: 3,
-//             isFav: false,
-//           },
-//         ],
-//       },

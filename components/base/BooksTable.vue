@@ -1,53 +1,44 @@
 <script setup lang="ts">
-import { Books } from "~/types";
 import { storeToRefs } from "pinia";
 import { useBookStore } from "~/stores/BookStore";
+const { title } = defineProps<{ title: string }>();
+
+const bookStore = useBookStore();
+const { fetchBook } = bookStore;
+const { bookList } = storeToRefs(bookStore);
+await fetchBook();
 
 const router = useRouter();
 
-const bookStore = useBookStore();
-
-const { fetchBook } = bookStore;
-
-const { bookList } = storeToRefs(bookStore);
-
-await fetchBook();
-
-const { title } = defineProps<{ title: string }>();
-
-const { data: books } = await useFetch<Books>("/api/books/");
-
 const minPageInput = ref();
 const maxPageInput = ref();
-
-let maxPagesArray: number = 0;
-
-if (books.value) {
-  maxPagesArray = books.value.library.reduce(
-    (maxPages, item) => Math.max(maxPages, item.pages),
-    0
-  );
-}
+let maxPagesArray: number = bookList.value.reduce(
+  (maxPages, item) => Math.max(maxPages, item.pages),
+  0
+);
 
 const handleMinPageInput = () => {
-  minPageInput.value > maxPagesArray ? (minPageInput.value = maxPagesArray) : 1;
-
-  minPageInput.value < 0 ? (minPageInput.value = 1) : Number;
+  minPageInput.value = Math.max(
+    1,
+    Math.min(maxPagesArray, +minPageInput.value)
+  );
 };
 
 const handleMaxPageInput = () => {
-  maxPageInput.value > maxPagesArray
-    ? (maxPageInput.value = maxPagesArray)
-    : maxPagesArray;
-
-  maxPageInput.value < 0 ? (maxPageInput.value = maxPagesArray) : Number;
+  if (maxPageInput.value === null) {
+    return;
+  }
+  maxPageInput.value = Math.max(
+    1,
+    Math.min(maxPagesArray, +maxPageInput.value)
+  );
 };
 
 const allBooks = computed(() => {
   const minPage = minPageInput.value;
   const maxPage = maxPageInput.value;
 
-  return books.value?.library.filter((book) => {
+  return bookList.value.filter((book) => {
     const page = book.pages;
 
     if (minPage && maxPage) {
@@ -101,9 +92,9 @@ const allBooks = computed(() => {
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
         <div
           class="rounded-lg border border-gray-600 pb-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
-          v-for="book in bookStore.bookList"
+          v-for="book in allBooks"
           :key="book.id"
-          v-if="allBooks?.length"
+          v-if="allBooks.length"
         >
           <nuxt-img
             :src="book.cover"
@@ -146,14 +137,14 @@ const allBooks = computed(() => {
               class="mt-1 -mb-1 rounded-lg border-[1px] border-black"
               :class="
                 book.isFav
-                  ? 'bg-rose-600 transition-colors duration-50 md:duration-100'
+                  ? 'bg-gray-600 transition-colors duration-50 md:duration-100'
                   : 'bg-green-600 transition-colors duration-50 md:duration-100'
               "
             >
               <nuxt-img
                 :src="book.isFav ? '/svg/minus.svg' : '/svg/plus.svg'"
-                height="30"
-                width="30"
+                height="25"
+                width="25"
               />
             </div>
           </div>
@@ -163,7 +154,12 @@ const allBooks = computed(() => {
           <h3 class="text-xl text-center md:text-4xl mt-12">
             No se han encontrado libros
           </h3>
-          <nuxt-img class="-mt-20 md:-mt-28" src="/svg/book-finder.svg" />
+          <nuxt-img
+            class="-mt-20 md:-mt-28"
+            width="550"
+            height="50"
+            src="/svg/book-finder.svg"
+          />
         </div>
       </section>
     </div>
