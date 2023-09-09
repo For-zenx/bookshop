@@ -61,7 +61,7 @@ const toggleDropDown = () => {
         </div>
         <div
           v-else
-          v-for="book in shuffledFavs"
+          v-for="book in bookStore.favs"
           class="p-2 border-b-[1px] border-gray-500 grid grid-cols-12 grid-rows-4 hover:bg-slate-600 hover:bg-opacity-30"
         >
           <nuxt-img

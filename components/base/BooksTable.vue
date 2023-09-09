@@ -145,6 +145,7 @@ const allBooks = computed(() => {
                 :src="book.isFav ? '/svg/minus.svg' : '/svg/plus.svg'"
                 height="25"
                 width="25"
+                alt="Minus/Plus"
               />
             </div>
           </div>
