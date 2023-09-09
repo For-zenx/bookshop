@@ -117,5 +117,10 @@ const toggleDropDown = () => {
         </div>
       </div>
     </div>
+    <span
+      :class="showDropDown ? 'underline mt-2 ml-3 font-bold' : ''"
+      class="fixed"
+      >{{ bookStore.favCount }}</span
+    >
   </div>
 </template>

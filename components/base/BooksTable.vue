@@ -3,6 +3,8 @@ import { Books } from "~/types";
 import { storeToRefs } from "pinia";
 import { useBookStore } from "~/stores/BookStore";
 
+const router = useRouter();
+
 const bookStore = useBookStore();
 
 const { fetchBook } = bookStore;
@@ -99,9 +101,8 @@ const allBooks = computed(() => {
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
         <div
           class="rounded-lg border border-gray-600 pb-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
-          v-for="book in allBooks"
+          v-for="book in bookStore.bookList"
           :key="book.id"
-          :to="`/${book.id}`"
           v-if="allBooks?.length"
         >
           <nuxt-img
@@ -110,27 +111,54 @@ const allBooks = computed(() => {
             height="300"
             width="300"
             :alt="book.title"
+            @click="router.push(book.id)"
           />
 
-          <h3 class="font-semibold line-clamp-1 hover:underline mt-2 pl-1">
+          <h3
+            class="font-semibold line-clamp-1 hover:underline mt-2 pl-1"
+            @click="router.push(book.id)"
+          >
             {{ book.title }}
           </h3>
           <p
             class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1"
+            @click="router.push(book.id)"
           >
             Autor: {{ book.author.name }}
           </p>
           <p
             class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1"
+            @click="router.push(book.id)"
           >
             Género: {{ book.genre }}
           </p>
           <p
             class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 italic pl-1"
+            @click="router.push(book.id)"
           >
             Páginas: {{ book.pages }}
           </p>
+          <div
+            class="flex justify-center border-t-[1px] border-gray-500 mt-2"
+            @click="bookStore.toggleFav(Number(book.id))"
+          >
+            <div
+              class="mt-1 -mb-1 rounded-lg border-[1px] border-black"
+              :class="
+                book.isFav
+                  ? 'bg-rose-600 transition-colors duration-50 md:duration-100'
+                  : 'bg-green-600 transition-colors duration-50 md:duration-100'
+              "
+            >
+              <nuxt-img
+                :src="book.isFav ? '/svg/minus.svg' : '/svg/plus.svg'"
+                height="30"
+                width="30"
+              />
+            </div>
+          </div>
         </div>
+
         <div v-else class="col-span-2 md:col-start-2">
           <h3 class="text-xl text-center md:text-4xl mt-12">
             No se han encontrado libros
