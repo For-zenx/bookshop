@@ -32,6 +32,13 @@ export const useBookStore = defineStore("bookList", {
       if (book) {
         book.isFav = !book.isFav;
       }
+      localStorage.setItem("favs", JSON.stringify(this.bookList));
+    },
+    obtainToggleHistory() {
+      const data = localStorage.getItem("favs");
+      if (data) {
+        this.bookList = JSON.parse(data);
+      }
     },
   },
 });

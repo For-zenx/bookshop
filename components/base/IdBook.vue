@@ -4,37 +4,31 @@ import { storeToRefs } from "pinia";
 import { useBookStore } from "~/stores/BookStore";
 
 const bookStore = useBookStore();
-
 const { fetchBook } = bookStore;
-
 const { bookList } = storeToRefs(bookStore);
-
 await fetchBook();
 
 const { data: books } = await useFetch<Books>("/api/books/");
-
 const { id } = useRoute().params;
-
 const router = useRouter();
-
 const route = useRoute();
+onMounted(() => {
+  bookStore.obtainToggleHistory();
+});
 
 const isFirstPage = () => Number(id) === 1;
 const isLastPage = () => {
   const currentId = Number(route.params.id);
   return currentId === books.value?.library.length;
 };
-
 const goToHome = () => {
   router.push("/");
 };
-
 const goBack = () => {
   if (!isFirstPage()) {
     router.push(`/${Number(id) - 1}`);
   }
 };
-
 const goForward = () => {
   if (!isLastPage()) {
     router.push(`/${Number(id) + 1}`);
@@ -137,7 +131,7 @@ const goForward = () => {
                 :class="isFirstPage() ? 'opacity-20 cursor-not-allowed' : ''"
                 @click="goBack()"
               />
-              <img
+              <nuxt-img
                 src="/svg/angle-right.svg"
                 width="45"
                 height="45"
