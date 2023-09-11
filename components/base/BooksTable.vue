@@ -8,6 +8,10 @@ const { fetchBook } = bookStore;
 const { bookList } = storeToRefs(bookStore);
 await fetchBook();
 
+onMounted(() => {
+  bookStore.obtainToggleHistory();
+});
+
 const router = useRouter();
 
 const minPageInput = ref();
@@ -137,8 +141,8 @@ const allBooks = computed(() => {
               class="mt-1 -mb-1 rounded-lg border-[1px] border-black"
               :class="
                 book.isFav
-                  ? 'bg-gray-600 transition-colors duration-50 md:duration-100'
-                  : 'bg-green-600 transition-colors duration-50 md:duration-100'
+                  ? 'bg-gray-500 transition-colors duration-50 md:duration-100'
+                  : 'bg-green-700 transition-colors duration-50 md:duration-100'
               "
             >
               <nuxt-img
