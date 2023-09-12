@@ -5,6 +5,7 @@ import { useBookStore } from "~/stores/BookStore";
 const bookStore = useBookStore();
 const { fetchBook, obtainToggleHistory, toggleFav } = bookStore;
 const { bookList } = storeToRefs(bookStore);
+await fetchBook();
 
 const { id } = useRoute().params;
 const router = useRouter();
@@ -15,7 +16,6 @@ const goBack = () => !isFirstPage() && router.push(`/${Number(id) - 1}`);
 const goForward = () => !isLastPage() && router.push(`/${Number(id) + 1}`);
 
 onMounted(() => {
-  fetchBook();
   obtainToggleHistory();
 });
 </script>

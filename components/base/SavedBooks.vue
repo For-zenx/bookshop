@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useBookStore } from "~/stores/BookStore";
+import { onClickOutside } from "@vueuse/core";
+
 const router = useRouter();
 const bookStore = useBookStore();
 const { fetchBook, toggleFav } = bookStore;
 await fetchBook();
-const showDropDown = ref(false);
 
+const showDropDown = ref(false);
 const toggleDropDown = () => {
   showDropDown.value = !showDropDown.value;
 };
@@ -14,6 +16,11 @@ const toggleDropDown = () => {
   <div class="relative">
     <button
       @click="toggleDropDown()"
+      :class="
+        bookStore.favCount === 0
+          ? 'cursor-not-allowed opacity-50 ease-in-out duration-200'
+          : 'opacity-100 transition-opacity ease-in-out duration 200'
+      "
       class="cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50"
       aria-label="Abrir menú desplegable"
     >
@@ -111,7 +118,10 @@ const toggleDropDown = () => {
       </div>
     </div>
     <span
-      :class="showDropDown ? 'underline mt-2 ml-1 font-bold' : ''"
+      :class="[
+        showDropDown ? 'underline mt-2 ml-1 font-bold' : '',
+        bookStore.favCount === 0 ? 'opacity-80' : '',
+      ]"
       class="fixed"
       >{{ bookStore.favCount }}</span
     >

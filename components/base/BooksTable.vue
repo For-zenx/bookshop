@@ -74,7 +74,7 @@ const filteredBooks = computed(() => {
       </header>
       <div class="mb-6 text-center md:text-start">
         <div class="pb-1">Busca por rango de páginas</div>
-        <div class="flex items-center space-x-4">
+        <div class="flex justify-center md:justify-normal space-x-4">
           <p>Min:</p>
           <input
             id="minPageInput"

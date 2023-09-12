@@ -29,7 +29,7 @@ const goToHome = () => {
         />
       </svg>
     </div>
-
+    <BaseSearchBooks />
     <BaseSavedBooks />
   </nav>
 </template>
