@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { useOpenModal } from "~/stores/OpenSearchModal";
+import { onClickOutside } from "@vueuse/core";
 const openModal = useOpenModal();
+const modal = ref(null);
+onClickOutside(modal, () => {
+  openModal.toggleSearchModal();
+});
 </script>
 <template>
-  <div v-if="openModal.isOpenSearchModal" class="flex justify-center">
+  <div
+    v-if="openModal.isOpenSearchModal"
+    class="flex justify-center"
+    ref="modal"
+  >
     <div
       class="fixed rounded-lg bg-slate-800 shadow-lg min-w-full md:min-w-[550px] md:max-w-[550px] md:min-h-[200px] md:max-h-[400px] z-40 md:mt-12 p-3"
     >
