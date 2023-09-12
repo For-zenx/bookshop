@@ -11,7 +11,7 @@ export default defineEventHandler((event) => {
           "Una aventura épica en un mundo de fantasía llamado la Tierra Media.",
         year: 1954,
         ISBN: "978-0618640157",
-        id: "1",
+        id: 1,
         author: {
           name: "J.R.R. Tolkien",
           otherBooks: ["El Hobbit", "El Silmarillion"],
@@ -28,7 +28,7 @@ export default defineEventHandler((event) => {
           "En un reino donde las estaciones duran años, una batalla épica por el trono se desarrolla.",
         year: 1996,
         ISBN: "978-0553103540",
-        id: "2",
+        id: 2,
         author: {
           name: "George R. R. Martin",
           otherBooks: [
@@ -49,7 +49,7 @@ export default defineEventHandler((event) => {
           "Un niño descubre que es un mago y comienza una aventura en una escuela de magia.",
         year: 1997,
         ISBN: "978-0747532699",
-        id: "3",
+        id: 3,
         author: {
           name: "J.K. Rowling",
           otherBooks: [
@@ -70,7 +70,7 @@ export default defineEventHandler((event) => {
           "Una inquietante visión de un futuro distópico y totalitario.",
         year: 1949,
         ISBN: "978-0451524935",
-        id: "4",
+        id: 4,
         author: {
           name: "George Orwell",
           otherBooks: ["Rebelión en la granja"],
@@ -87,7 +87,7 @@ export default defineEventHandler((event) => {
           "Un gallego se queda en casa en pleno apocalipsis zombie y acaba casi salvando el mundo",
         year: 2001,
         ISBN: "978-4444532611",
-        id: "5",
+        id: 5,
         author: {
           name: "Manel Loreiro",
           otherBooks: [],
@@ -104,7 +104,7 @@ export default defineEventHandler((event) => {
           "En el inhóspito planeta desértico de Arrakis, una gran intriga política y familiar se desarrolla.",
         year: 1965,
         ISBN: "978-0441172719",
-        id: "6",
+        id: 6,
         author: {
           name: "Frank Herbert",
           otherBooks: ["El mesías de Dune", "Hijos de Dune"],
@@ -120,7 +120,7 @@ export default defineEventHandler((event) => {
         synopsis: "Un viaje absurdo y cómico por el espacio, con toallas.",
         year: 1979,
         ISBN: "978-0345391803",
-        id: "7",
+        id: 7,
         author: {
           name: "Douglas Adams",
           otherBooks: [
@@ -140,7 +140,7 @@ export default defineEventHandler((event) => {
           "Una visión profética de la ciber-realidad y la inteligencia artificial.",
         year: 1984,
         ISBN: "978-0441569595",
-        id: "8",
+        id: 8,
         author: {
           name: "William Gibson",
           otherBooks: ["Conde Cero", "Mona Lisa Acelerada"],
@@ -157,7 +157,7 @@ export default defineEventHandler((event) => {
           "Una sociedad futura donde los libros están prohibidos y 'bomberos' queman cualquier libro que encuentren.",
         year: 1953,
         ISBN: "978-1451673319",
-        id: "9",
+        id: 9,
         author: {
           name: "Ray Bradbury",
           otherBooks: ["Crónicas marcianas", "El hombre ilustrado"],
@@ -174,7 +174,7 @@ export default defineEventHandler((event) => {
           "Una familia se muda a un hotel aislado para el invierno donde una presencia siniestra influye en el padre hacia la violencia.",
         year: 1977,
         ISBN: "978-0307743657",
-        id: "10",
+        id: 10,
         author: {
           name: "Stephen King",
           otherBooks: ["Carrie", "It"],
@@ -191,7 +191,7 @@ export default defineEventHandler((event) => {
           "La historia del infame conde Drácula y su intento de mudarse de Transilvania a Inglaterra.",
         year: 1897,
         ISBN: "978-0486411095",
-        id: "11",
+        id: 11,
         author: {
           name: "Bram Stoker",
           otherBooks: [
@@ -211,7 +211,7 @@ export default defineEventHandler((event) => {
           "Un científico obsesionado crea una criatura viva a partir de partes de cuerpos robadas, con consecuencias desastrosas.",
         year: 1818,
         ISBN: "978-0486282114",
-        id: "12",
+        id: 12,
         author: {
           name: "Mary Shelley",
           otherBooks: ["El último hombre", "Valperga"],
@@ -228,7 +228,7 @@ export default defineEventHandler((event) => {
           "La historia de un monstruo ancestral que amenaza con revivir y dominar el mundo.",
         year: 1928,
         ISBN: "978-1542461690",
-        id: "13",
+        id: 13,
         author: {
           name: "H.P. Lovecraft",
           otherBooks: ["El horror de Dunwich", "En las montañas de la locura"],

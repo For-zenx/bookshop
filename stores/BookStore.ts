@@ -28,7 +28,7 @@ export const useBookStore = defineStore("bookList", {
       }
     },
     async toggleFav(id: number) {
-      const book = this.bookList.find((t) => Number(t.id) === id);
+      const book = this.bookList.find((t) => t.id === id);
       if (book) {
         book.isFav = !book.isFav;
       }

@@ -1,24 +1,21 @@
-<script setup>
-import { storeToRefs } from "pinia";
+<script setup lang="ts">
 import { useBookStore } from "~/stores/BookStore";
 const router = useRouter();
-
 const bookStore = useBookStore();
-const { fetchBook } = bookStore;
-const { bookList } = storeToRefs(bookStore);
+const { fetchBook, toggleFav } = bookStore;
 await fetchBook();
-
 const showDropDown = ref(false);
+
 const toggleDropDown = () => {
   showDropDown.value = !showDropDown.value;
 };
 </script>
-
 <template>
   <div class="relative">
     <button
       @click="toggleDropDown()"
       class="cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50"
+      aria-label="Abrir menú desplegable"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +34,7 @@ const toggleDropDown = () => {
     </button>
     <div v-if="showDropDown" class="flex justify-end">
       <div
-        class="fixed rounded-lg bg-slate-700 shadow-lg min-w-[380px] max-w-[380px] grid overflow-y-scroll min-h-[100px] max-h-[470px]"
+        class="fixed rounded-lg bg-slate-700 shadow-lg min-w-screen sm:min-w-[380px] sm:max-w-[380px] grid overflow-y-scroll min-h-[100px] max-h-[470px]"
       >
         <div class="sticky top-0 bg-slate-700 z-10 p-2 flex">
           Reading list
@@ -62,24 +59,25 @@ const toggleDropDown = () => {
         <div
           v-else
           v-for="book in bookStore.favs"
+          :key="book.id"
           class="p-2 border-b-[1px] border-gray-500 grid grid-cols-12 grid-rows-4 hover:bg-slate-600 hover:bg-opacity-30"
         >
           <nuxt-img
             class="col-span-3 row-span-4 min-h-[130px] max-h-[130px] cursor-pointer"
             :src="book.cover"
-            alt="Book Image"
+            :alt="book.title"
             width="80"
             height="80"
-            @click="router.push(book.id)"
+            @click="router.push(String(book.id))"
           />
           <div
             class="col-span-8 ml-1 line-clamp-1 p-1 font-bold cursor-pointer"
-            @click="router.push(book.id)"
+            @click="router.push(String(book.id))"
           >
             {{ book.title }}
           </div>
           <button
-            @click="bookStore.toggleFav(Number(book.id))"
+            @click="bookStore.toggleFav(book.id)"
             class="pl-0.5 cursor-pointer hover:bg-slate-600 hover:border-gray-400 hover:rounded-full duration-50"
           >
             <svg
@@ -98,14 +96,14 @@ const toggleDropDown = () => {
             </svg>
           </button>
           <div
-            class="text-sm underline row-start-2 ml-2 col-start-4 col-span-8 cursor-pointer"
-            @click="router.push(book.id)"
+            class="text-sm row-start-2 ml-2 col-start-4 col-span-8 cursor-pointer"
+            @click="router.push(String(book.id))"
           >
-            Sinposis:
+            Sinopsis:
           </div>
           <div
             class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400 line-clamp-3 cursor-pointer"
-            @click="router.push(book.id)"
+            @click="router.push(String(book.id))"
           >
             {{ book.synopsis }}
           </div>

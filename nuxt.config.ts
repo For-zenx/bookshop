@@ -12,7 +12,9 @@ export default defineNuxtConfig({
       meta: [
         { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
         { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
         { hid: "keyword", name: "keyword", content: "yoyo" },
+        { hid: "description", name: "description", content: "FINPO project" },
       ],
     },
   },

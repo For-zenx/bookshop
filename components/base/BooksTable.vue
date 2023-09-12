@@ -1,44 +1,43 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useBookStore } from "~/stores/BookStore";
+
 const { title } = defineProps<{ title: string }>();
 
 const bookStore = useBookStore();
-const { fetchBook } = bookStore;
+const { fetchBook, obtainToggleHistory, toggleFav } = bookStore;
 const { bookList } = storeToRefs(bookStore);
+
 await fetchBook();
 
 onMounted(() => {
-  bookStore.obtainToggleHistory();
+  obtainToggleHistory();
 });
 
 const router = useRouter();
 
-const minPageInput = ref();
-const maxPageInput = ref();
-let maxPagesArray: number = bookList.value.reduce(
+const minPageInput = ref<number | null>(null);
+const maxPageInput = ref<number | null>(null);
+let maxPagesArray = bookList.value.reduce(
   (maxPages, item) => Math.max(maxPages, item.pages),
   0
 );
-
 const handleMinPageInput = () => {
   minPageInput.value = Math.max(
     1,
     Math.min(maxPagesArray, +minPageInput.value)
   );
 };
-
 const handleMaxPageInput = () => {
   if (maxPageInput.value === null) {
     return;
   }
   maxPageInput.value = Math.max(
     1,
-    Math.min(maxPagesArray, +maxPageInput.value)
+    Math.min(maxPagesArray, +maxPageInput.value || maxPagesArray)
   );
 };
-
-const allBooks = computed(() => {
+const filteredBooks = computed(() => {
   const minPage = minPageInput.value;
   const maxPage = maxPageInput.value;
 
@@ -64,7 +63,7 @@ const allBooks = computed(() => {
 <template>
   <div class="flex justify-center pb-12">
     <div
-      class="max-w-6xl px-2 md:px-4 lg:px-8 py-6 md:py-12 mt-12 rounded-lg bg-slate-900 mx-1 sm:mx-12 md:mx-1"
+      class="max-w-5xl px-2 md:px-4 lg:px-8 py-6 md:py-12 mt-12 rounded-lg bg-slate-900 mx-1 sm:mx-12 md:mx-1"
     >
       <header>
         <h2
@@ -74,87 +73,90 @@ const allBooks = computed(() => {
         </h2>
       </header>
       <div class="mb-6 text-center md:text-start">
-        <div class="pb-1">Rango de Páginas:</div>
-        Min:
-        <input
-          class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500 mr-9"
-          placeholder="1"
-          type="number"
-          v-model="minPageInput"
-          @input="handleMinPageInput"
-        />
-        Max:
-        <input
-          class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500"
-          :placeholder="`${maxPagesArray}`"
-          type="number"
-          v-model="maxPageInput"
-          @input="handleMaxPageInput"
-        />
-      </div>
-
-      <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
-        <div
-          class="rounded-lg border border-gray-600 pb-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
-          v-for="book in allBooks"
-          :key="book.id"
-          v-if="allBooks.length"
-        >
-          <nuxt-img
-            :src="book.cover"
-            class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px] rounded-t-lg"
-            height="300"
-            width="300"
-            :alt="book.title"
-            @click="router.push(book.id)"
+        <div class="pb-1">Busca por rango de páginas</div>
+        <div class="flex items-center space-x-4">
+          <p>Min:</p>
+          <input
+            id="minPageInput"
+            class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500"
+            placeholder="1"
+            type="number"
+            v-model="minPageInput"
+            @input="handleMinPageInput"
           />
-
-          <h3
-            class="font-semibold line-clamp-1 hover:underline mt-2 pl-1"
-            @click="router.push(book.id)"
-          >
-            {{ book.title }}
-          </h3>
-          <p
-            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1"
-            @click="router.push(book.id)"
-          >
-            Autor: {{ book.author.name }}
-          </p>
-          <p
-            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1"
-            @click="router.push(book.id)"
-          >
-            Género: {{ book.genre }}
-          </p>
-          <p
-            class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 italic pl-1"
-            @click="router.push(book.id)"
-          >
-            Páginas: {{ book.pages }}
-          </p>
+          <p>Max:</p>
+          <input
+            id="maxPageInput"
+            class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500"
+            :placeholder="`${maxPagesArray}`"
+            type="number"
+            v-model="maxPageInput"
+            @input="handleMaxPageInput"
+          />
+        </div>
+      </div>
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
+        <template v-if="filteredBooks.length">
           <div
-            class="flex justify-center border-t-[1px] border-gray-500 mt-2"
-            @click="bookStore.toggleFav(Number(book.id))"
+            v-for="book in filteredBooks"
+            :key="book.id"
+            class="rounded-lg border border-gray-600 pb-2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 from-[95%] hover:from-slate-800 hover:via-slate-700 hover:to-slate-600 hover:from-[95%] duration-100 cursor-pointer"
           >
-            <div
-              class="mt-1 -mb-1 rounded-lg border-[1px] border-black"
-              :class="
-                book.isFav
-                  ? 'bg-gray-500 transition-colors duration-50 md:duration-100'
-                  : 'bg-green-700 transition-colors duration-50 md:duration-100'
-              "
+            <nuxt-img
+              :src="book.cover"
+              class="min-h-[250px] w-80 max-h-[250px] md:min-h-[290px] md:max-h-[290px] rounded-t-lg"
+              height="300"
+              width="300"
+              :alt="book.title"
+              @click="router.push(String(book.id))"
+            />
+            <h3
+              class="font-semibold line-clamp-1 hover:underline mt-2 pl-1 cursor-pointer"
+              @click="router.push(String(book.id))"
             >
-              <nuxt-img
-                :src="book.isFav ? '/svg/minus.svg' : '/svg/plus.svg'"
-                height="25"
-                width="25"
-                alt="Minus/Plus"
-              />
+              {{ book.title }}
+            </h3>
+            <p
+              class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1 cursor-pointer"
+              @click="router.push(String(book.id))"
+            >
+              Autor: {{ book.author.name }}
+            </p>
+            <p
+              class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1 cursor-pointer"
+              @click="router.push(String(book.id))"
+            >
+              Género: {{ book.genre }}
+            </p>
+            <p
+              class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 italic pl-1 cursor-pointer"
+              @click="router.push(String(book.id))"
+            >
+              Páginas: {{ book.pages }}
+            </p>
+            <div
+              class="flex justify-center border-t-[1px] border-gray-500 mt-2 cursor-pointer"
+              @click="bookStore.toggleFav(Number(book.id))"
+            >
+              <div
+                class="mt-1 -mb-1 rounded-lg border-[1px] border-black"
+                :class="{
+                  'bg-gray-500 transition-colors duration-50 md:duration-100':
+                    book.isFav,
+                  'bg-green-700 transition-colors duration-50 md:duration-100':
+                    !book.isFav,
+                }"
+              >
+                <nuxt-img
+                  :src="book.isFav ? '/svg/minus.svg' : '/svg/plus.svg'"
+                  height="25"
+                  width="25"
+                  alt="Minus/Plus"
+                />
+              </div>
             </div>
           </div>
-        </div>
-
+        </template>
         <div v-else class="col-span-2 md:col-start-2">
           <h3 class="text-xl text-center md:text-4xl mt-12">
             No se han encontrado libros
