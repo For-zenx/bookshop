@@ -6,7 +6,7 @@ const route = useRoute();
 const { data: books } = await useFetch<Books>("/api/books/");
 
 const bookInfo = books.value?.library.find((book) => {
-  return book.id === route.params.id;
+  return book.id === Number(route.params.id);
 });
 
 const headerTitle = bookInfo?.title;

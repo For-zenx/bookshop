@@ -18,8 +18,8 @@ const toggleDropDown = () => {
       @click="toggleDropDown()"
       :class="
         bookStore.favCount === 0
-          ? 'cursor-not-allowed opacity-50 ease-in-out duration-200'
-          : 'opacity-100 transition-opacity ease-in-out duration 200'
+          ? 'cursor-not-allowed opacity-50  duration-200'
+          : 'opacity-100 transition-opacity  duration 200'
       "
       class="cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50"
       aria-label="Abrir menú desplegable"
@@ -75,16 +75,16 @@ const toggleDropDown = () => {
             :alt="book.title"
             width="80"
             height="80"
-            @click="router.push(String(book.id))"
+            @click="router.push(String(book.id)), toggleDropDown()"
           />
           <div
             class="col-span-8 ml-1 line-clamp-1 p-1 font-bold cursor-pointer"
-            @click="router.push(String(book.id))"
+            @click="router.push(String(book.id)), toggleDropDown()"
           >
             {{ book.title }}
           </div>
           <button
-            @click="bookStore.toggleFav(book.id)"
+            @click="bookStore.toggleFav(book.id), toggleDropDown()"
             class="pl-0.5 cursor-pointer hover:bg-slate-600 hover:border-gray-400 hover:rounded-full duration-50"
           >
             <svg
@@ -104,13 +104,13 @@ const toggleDropDown = () => {
           </button>
           <div
             class="text-sm row-start-2 ml-2 col-start-4 col-span-8 cursor-pointer"
-            @click="router.push(String(book.id))"
+            @click="router.push(String(book.id)), toggleDropDown()"
           >
             Sinopsis:
           </div>
           <div
             class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400 line-clamp-3 cursor-pointer"
-            @click="router.push(String(book.id))"
+            @click="router.push(String(book.id)), toggleDropDown()"
           >
             {{ book.synopsis }}
           </div>

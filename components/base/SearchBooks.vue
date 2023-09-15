@@ -3,14 +3,14 @@ import { useMouseInElement } from "@vueuse/core";
 import { useOpenModal } from "../../stores/OpenSearchModal";
 const openModal = useOpenModal();
 const searchButton = ref(null);
-const { isOutside } = useMouseInElement(searchButton);
+const { isOutside: isMouseOutside } = useMouseInElement(searchButton);
 </script>
 <template>
   <button
     aria-label="Busca tu libro"
     ref="searchButton"
     :class="
-      !isOutside
+      !isMouseOutside
         ? 'opacity-100 duration-200 border-slate-300'
         : 'opacity-80 duration-200 border-gray-500'
     "

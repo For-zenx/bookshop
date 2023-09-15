@@ -32,4 +32,5 @@ const goToHome = () => {
     <BaseSearchBooks />
     <BaseSavedBooks />
   </nav>
+  <BaseSearchModal />
 </template>

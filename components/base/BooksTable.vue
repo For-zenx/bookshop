@@ -110,51 +110,57 @@ const filteredBooks = computed(() => {
               :alt="book.title"
               @click="router.push(String(book.id))"
             />
-            <h3
-              class="font-semibold line-clamp-1 hover:underline mt-2 pl-1 cursor-pointer"
-              @click="router.push(String(book.id))"
-            >
-              {{ book.title }}
-            </h3>
+            <div class="flex justify-between mt-1">
+              <h3
+                class="font-semibold line-clamp-1 hover:underline mt-1 pl-1 cursor-pointer"
+                @click="router.push(String(book.id))"
+              >
+                {{ book.title }}
+              </h3>
+              <button
+                @click="toggleFav(book.id)"
+                aria-label="Guardar"
+                class="mx-2"
+                :class="
+                  book.isFav
+                    ? 'duration-100 lg:duration-200'
+                    : 'duration-100 lg:duration-200'
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  :fill="book.isFav ? 'rgb(4 120 87)' : 'none'"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  :stroke="book.isFav ? '' : '#9ca3af'"
+                  class="w-8 h-8"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  />
+                </svg>
+              </button>
+            </div>
             <p
-              class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1 cursor-pointer"
+              class="align-sub line-clamp-1 hover:underline text-sm mt-1 pl-1 cursor-pointer"
               @click="router.push(String(book.id))"
             >
               Autor: {{ book.author.name }}
             </p>
             <p
-              class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 pl-1 cursor-pointer"
+              class="align-sub line-clamp-1 hover:underline text-sm mt-1 pl-1 cursor-pointer"
               @click="router.push(String(book.id))"
             >
               Género: {{ book.genre }}
             </p>
             <p
-              class="align-sub line-clamp-1 hover:underline text-sm font-mono mt-1 italic pl-1 cursor-pointer"
+              class="align-sub line-clamp-1 hover:underline text-sm mt-1 italic pl-1 cursor-pointer"
               @click="router.push(String(book.id))"
             >
               Páginas: {{ book.pages }}
             </p>
-            <div
-              class="flex justify-center border-t-[1px] border-gray-500 mt-2 cursor-pointer"
-              @click="bookStore.toggleFav(Number(book.id))"
-            >
-              <div
-                class="mt-1 -mb-1 rounded-lg border-[1px] border-black"
-                :class="{
-                  'bg-gray-500 transition-colors duration-50 md:duration-100':
-                    book.isFav,
-                  'bg-green-700 transition-colors duration-50 md:duration-100':
-                    !book.isFav,
-                }"
-              >
-                <nuxt-img
-                  :src="book.isFav ? '/svg/minus.svg' : '/svg/plus.svg'"
-                  height="25"
-                  width="25"
-                  alt="Minus/Plus"
-                />
-              </div>
-            </div>
           </div>
         </template>
         <div v-else class="col-span-2 md:col-start-2">

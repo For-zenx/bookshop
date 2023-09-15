@@ -16,7 +16,6 @@ definePageMeta({
 </script>
 <template>
   <main class="body">
-    <BaseSearchModal />
     <BaseBooksTable title="Books Section" />
   </main>
 </template>

@@ -52,21 +52,16 @@ onMounted(() => {
                 </h2>
                 <button
                   aria-label="Guardar"
-                  class="p-1 border-2 rounded-full duration-500 mb-12 lg:mb-0"
-                  :class="
-                    book.isFav
-                      ? 'bg-emerald-700 border-black duration-100 lg:duration-300'
-                      : 'bg-transparent border-gray-400 duration-100 lg:duration-300'
-                  "
+                  class="p-1 mb-4 transition-colors duration-200"
                   @click="toggleFav(book.id)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    :fill="book.isFav ? '#000000' : 'none'"
+                    :fill="book.isFav ? 'rgb(4 120 87)' : 'none'"
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     :stroke="book.isFav ? '' : '#9ca3af'"
-                    class="w-9 h-9"
+                    class="w-11 h-11"
                   >
                     <path
                       stroke-linecap="round"
@@ -76,7 +71,7 @@ onMounted(() => {
                   </svg>
                 </button>
               </div>
-              <div class="mt-3 lg:mt-8 text-lg font-mono">
+              <div class="lg:mt-8 text-lg font-mono">
                 Sinopsis: {{ book.synopsis }}
               </div>
               <div class="mt-4 lg:mt-6 font-mono font-bold">
