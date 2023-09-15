@@ -10,7 +10,7 @@ const goToHome = () => {
 
 <template>
   <nav
-    :class="y > 10 ? 'border-b-2 border-slate-800 duration-500' : ''"
+    :class="y > 10 ? 'border-b-2 border-slate-800 ' : ''"
     class="navbar flex justify-between pt-2"
   >
     <div class="cursor-pointer" @click="goToHome()">
