@@ -63,7 +63,7 @@ const filteredBooks = computed(() => {
 <template>
   <div class="flex justify-center pb-12">
     <div
-      class="max-w-5xl px-2 md:px-4 lg:px-8 py-6 md:py-12 mt-12 rounded-lg bg-slate-900 mx-1 sm:mx-12 md:mx-1"
+      class="max-w-lg md:max-w-5xl px-2 md:px-4 lg:px-8 py-6 md:py-12 mt-12 rounded-lg bg-slate-900 mx-1 sm:mx-12 md:mx-1"
     >
       <header>
         <h2
