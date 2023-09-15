@@ -18,8 +18,5 @@
     "nuxt": "^3.6.5",
     "pinia": "^2.1.6",
     "postcss-import": "^15.1.0"
-  },
-  "dependencies": {
-    "netlify-cli": "^16.1.0"
   }
 }

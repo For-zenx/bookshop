@@ -1,63 +1,67 @@
-# Nuxt 3 Minimal Starter
+# Bookshop Online
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Bookshop Online es una aplicación diseñada para amantes de la lectura que desean descubrir y explorar los mejores libros disponibles. La aplicación proporciona información detallada sobre cada libro, incluyendo sus características, sinopsis y reseñas. Además, los usuarios pueden agregar libros a su lista de lectura personalizada para poder acceder a ellos en cualquier momento. ¡Sumérgete en el mundo de la lectura con Bookshop Online! [Visita la Página Ahora!](https://bookshop-woad.vercel.app/)
 
-## Setup
+## Instalación
 
-Make sure to install the dependencies:
+Para instalar el proyecto de manera local, sigue estos pasos:
+
+1. Clona el repositorio desde GitHub utilizando el siguiente comando:
 
 ```bash
 # npm
 npm install
 
-# pnpm
-pnpm install
-
 # yarn
 yarn install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+2. Navega hasta la carpeta del proyecto:
 
 ```bash
-# npm
-npm run dev
+cd bookshop
+```
 
-# pnpm
-pnpm run dev
+3. Instala las dependencias utilizando Yarn o npm:
 
-# yarn
+```bash
+yarn install
+# o
+npm install
+```
+
+4. Una vez que se completen las instalaciones, puedes ejecutar la aplicación localmente con el siguiente comando:
+
+```bash
 yarn dev
+# o
+npm run dev
 ```
 
-## Production
+La aplicación estará disponible en tu navegador en la dirección http://localhost:3000/.
 
-Build the application for production:
+## Extensiones o Dependencias
 
-```bash
-# npm
-npm run build
+### TailwindCSS
 
-# pnpm
-pnpm run build
+TailwindCSS desempeñó un papel fundamental en la creación de Bookshop Online Minimal Design al proporcionar un sistema de diseño flexible y altamente personalizable. Permite un desarrollo rápido y eficiente de estilos, lo que garantiza una apariencia moderna y atractiva para la aplicación.
 
-# yarn
-yarn build
-```
+### VueUse
 
-Locally preview production build:
+VueUse fue esencial para mejorar el rendimiento y la funcionalidad de componentes reutilizables en la aplicación. Utilizamos las siguientes funcionalidades:
 
-```bash
-# npm
-npm run preview
+`onClickOutside`: Esta función se utilizó para gestionar el cierre de modales cuando los usuarios hacen clic fuera de ellos, mejorando así la experiencia de usuario.
 
-# pnpm
-pnpm run preview
+`mouseInElement`: Permitió una interacción más fluida al detectar la posición del ratón en elementos específicos.
 
-# yarn
-yarn preview
-```
+`useBreakpoints`: Ayudó a optimizar el diseño responsivo para tablets y computadoras de escritorio.
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+`useWindowScroll`: Contribuyó a mejorar la experiencia de usuario y la interfaz de usuario al manejar eventos de desplazamiento.
+
+### Pinia
+
+Pinia desempeñó un papel crucial en la gestión de estados globales en la aplicación. Proporcionó una arquitectura de estado robusta y escalable, lo que facilitó la gestión de datos compartidos entre diferentes componentes y garantizó una experiencia coherente para los usuarios.
+
+### Nuxt-Img
+
+Nuxt-Img se utilizó para garantizar que las imágenes de la aplicación estén en formato de próxima generación, lo que mejora la velocidad de carga de la página y la experiencia del usuario. Esto es esencial para mantener un rendimiento óptimo y una apariencia atractiva en Bookshop Online Minimal Design.
