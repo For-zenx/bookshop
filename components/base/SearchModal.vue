@@ -86,7 +86,7 @@ const filteredBooks = computed(() => {
       </div>
       <div
         v-if="noSearchFound"
-        class="flex justify-center items-center mt-72 md:mt-14 text-lg"
+        class="flex justify-center items-center mt-64 md:mt-14 text-lg"
       >
         No search found
       </div>
@@ -100,10 +100,10 @@ const filteredBooks = computed(() => {
           <div class="col-span-11 flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
+              :fill="book.isFav ? 'rgb(202 138 4)' : 'none'"
               viewBox="0 0 24 24"
               stroke-width="1.5"
-              stroke="currentColor"
+              :stroke="book.isFav ? '#000000' : 'currentColor'"
               class="w-6 h-6 mr-4"
             >
               <path
@@ -113,7 +113,7 @@ const filteredBooks = computed(() => {
               />
             </svg>
 
-            <span>{{ book.title }}</span>
+            <span class="line-clamp-1">{{ book.title }}</span>
           </div>
 
           <svg

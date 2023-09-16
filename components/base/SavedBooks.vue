@@ -16,6 +16,12 @@ const handleKeyDown = (event: KeyboardEvent) => {
     toggleDropDown();
   }
 };
+onMounted(() => {
+  window.addEventListener("keydown", handleKeyDown);
+});
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyDown);
+});
 </script>
 <template>
   <div class="relative">
@@ -65,7 +71,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
             />
           </svg>
         </div>
-        <div v-if="bookStore.favs.length === 0" class="text-center pb-3">
+        <div v-if="bookStore.favs.length === 0" class="text-center pb-3 mx-12">
           Your reading list is empty.
         </div>
         <div
@@ -89,7 +95,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
             {{ book.title }}
           </div>
           <button
-            @click="bookStore.toggleFav(book.id), toggleDropDown()"
+            @click="bookStore.toggleFav(book.id)"
             class="pl-0.5 cursor-pointer hover:bg-slate-600 hover:border-gray-400 hover:rounded-full duration-50"
           >
             <svg
