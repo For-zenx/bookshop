@@ -78,7 +78,7 @@ const filteredBooks = computed(() => {
         />
         <div
           v-if="md"
-          class="mx-2 my-3 cursor-pointer hover:underline text-white"
+          class="mx-2 my-3 cursor-pointer underline text-white"
           @click="openModal.toggleSearchModal()"
         >
           Cancel

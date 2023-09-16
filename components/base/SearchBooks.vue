@@ -30,7 +30,7 @@ onUnmounted(() => {
 
 <template>
   <button
-    aria-label="Busca tu libro"
+    aria-label="Search..."
     ref="searchButton"
     :class="[
       !isMouseOutside
