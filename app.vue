@@ -1,4 +1,4 @@
-import { ClientOnly } from './.nuxt/components';
+<script setup lang="ts"></script>
 <template>
   <NuxtLayout>
     <NuxtPage />

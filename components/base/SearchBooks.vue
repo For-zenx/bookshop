@@ -32,13 +32,12 @@ onUnmounted(() => {
   <button
     :aria-label="md ? 'Search... Ctrl K' : 'Search...'"
     ref="searchButton"
-    :class="[
+    :class="
       !isMouseOutside
         ? 'opacity-100  duration-200  border-slate-300'
-        : 'opacity-80 duration-200  border-gray-500',
-      md ? 'min-w-[180px]' : 'min-w-[110px]',
-    ]"
-    class="border-[2px] rounded-md max-h-[38px] mt-0.5"
+        : 'opacity-80 duration-200  border-gray-500'
+    "
+    class="border-[2px] rounded-md max-h-[38px] mt-0.5 min-w-[110px] md:min-w-[180px]"
     @click="openModal.toggleSearchModal()"
   >
     <div class="flex items-center">

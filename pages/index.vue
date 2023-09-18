@@ -1,4 +1,3 @@
-import { Title } from '../.nuxt/components';
 <script lang="ts" setup>
 useHead({
   title: "Bookshop Online",
@@ -16,6 +15,6 @@ definePageMeta({
 </script>
 <template>
   <main class="body">
-    <BaseBooksTable title="Books Section" />
+    <BaseBooksTable title="Books Section " />
   </main>
 </template>

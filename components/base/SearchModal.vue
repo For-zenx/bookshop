@@ -100,7 +100,7 @@ const filteredBooks = computed(() => {
           <div class="col-span-11 flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              :fill="book.isFav ? 'rgb(202 138 4)' : 'none'"
+              :fill="book.isFav ? 'rgb(22 163 74)' : 'none'"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               :stroke="book.isFav ? '#000000' : 'currentColor'"

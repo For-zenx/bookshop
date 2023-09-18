@@ -11,17 +11,6 @@ const showDropDown = ref(false);
 const toggleDropDown = () => {
   showDropDown.value = !showDropDown.value;
 };
-const handleKeyDown = (event: KeyboardEvent) => {
-  if (event.key === "Escape" && showDropDown) {
-    toggleDropDown();
-  }
-};
-onMounted(() => {
-  window.addEventListener("keydown", handleKeyDown);
-});
-onUnmounted(() => {
-  window.removeEventListener("keydown", handleKeyDown);
-});
 </script>
 <template>
   <div class="relative">
