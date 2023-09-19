@@ -1,12 +1,12 @@
 # Bookshop Online
 
-Bookshop Online es una aplicación diseñada para amantes de la lectura que desean descubrir y explorar los mejores libros disponibles. La aplicación proporciona información detallada sobre cada libro, incluyendo sus características, sinopsis y reseñas. Además, los usuarios pueden agregar libros a su lista de lectura personalizada para poder acceder a ellos en cualquier momento. [¡Sumérgete en el mundo de la lectura con Bookshop Online!](https://bookshop-woad.vercel.app/)
+Bookshop Online is a book discovery and exploration app designed for book lovers. The app provides detailed information about each book, including its features, synopsis, and reviews. Users can also add books to their personalized reading list for easy access. [Immerse yourself in the world of reading with Bookshop Online!](https://bookshop-woad.vercel.app/)
 
-## Instalación
+## Install the project
 
-Para instalar el proyecto de manera local, sigue estos pasos:
+To install the project locally, follow these steps:
 
-1. Clona el repositorio desde GitHub utilizando el siguiente comando:
+1. Clone the repository from GitHub using the following command:
 
 ```bash
 # npm
@@ -16,52 +16,52 @@ npm install
 yarn install
 ```
 
-2. Navega hasta la carpeta del proyecto:
+2. Navigate to the project folder:
 
 ```bash
 cd bookshop
 ```
 
-3. Instala las dependencias utilizando Yarn o npm:
+3. Install the dependencies using Yarn or npm:
 
 ```bash
 yarn install
-# o
+# or
 npm install
 ```
 
-4. Una vez que se completen las instalaciones, puedes ejecutar la aplicación localmente con el siguiente comando:
+4. Once the installations are complete, you can run the application locally with the following command:
 
 ```bash
 yarn dev
-# o
+# or
 npm run dev
 ```
 
-La aplicación estará disponible en tu navegador en la dirección http://localhost:3000/.
+The application will be available in your browser at the address http://localhost:3000/.
 
-## Extensiones o Dependencias
+## Dependencies
 
 ### TailwindCSS
 
-TailwindCSS desempeñó un papel fundamental en la creación de Bookshop Online al proporcionar un sistema de diseño flexible y altamente personalizable. Permite un desarrollo rápido y eficiente de estilos, lo que garantiza una apariencia moderna y atractiva para la aplicación.
+TailwindCSS played a fundamental role in the creation of Bookshop Online by providing a flexible and highly customizable design system. It allows for quick and efficient styling development, ensuring a modern and appealing look for the application.
 
 ### VueUse
 
-VueUse fue esencial para mejorar el rendimiento y la funcionalidad de componentes reutilizables en la aplicación. Utilizamos las siguientes funcionalidades:
+VueUse was essential to improving the performance and functionality of reusable components in the application. We used the following features:
 
-- onClickOutside: Esta función se utilizó para gestionar el cierre de modales cuando los usuarios hacen clic fuera de ellos, mejorando así la experiencia de usuario.
+- onClickOutside: This function was used to manage the closing of modals when users click outside of them, thus improving the user experience.
 
-- mouseInElement: Permitió una interacción más fluida al detectar la posición del ratón en elementos específicos.
+- mouseInElement: Allowed for smoother interaction by detecting the mouse position in specific elements.
 
-- useBreakpoints: Ayudó a optimizar el diseño responsivo para tablets y computadoras de escritorio.
+- useBreakpoints: Helped to optimize responsive design for tablets and desktop computers.
 
-- useWindowScroll: Contribuyó a mejorar la experiencia de usuario y la interfaz de usuario al manejar eventos de desplazamiento.
+- useWindowScroll: Contributed to improving the user experience and interface by handling scroll events.
 
 ### Pinia
 
-Pinia desempeñó un papel crucial en la gestión de estados globales en la aplicación. Proporcionó una arquitectura de estado robusta y escalable, lo que facilitó la gestión de datos compartidos entre diferentes componentes y garantizó una experiencia coherente para los usuarios.
+Pinia played a crucial role in managing global states in the application. It provided a robust and scalable state architecture, making it easy to manage shared data between different components and ensuring a consistent experience for users.
 
 ### Nuxt-Img
 
-Nuxt-Img se utilizó para garantizar que las imágenes de la aplicación estén en formato de próxima generación, lo que mejora la velocidad de carga de la página y la experiencia del usuario. Esto es esencial para mantener un rendimiento óptimo y una apariencia atractiva en Bookshop Online.
+Nuxt-Img was used to ensure that the application's images are in next-generation format, which improves page load speed and user experience. This is essential for maintaining optimal performance and an attractive appearance in Bookshop Online.
