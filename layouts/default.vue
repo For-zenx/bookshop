@@ -1,2 +1,2 @@
 import { LayoutNavbar } from '../.nuxt/components';
-<template><LayoutNavbar /><slot /></template>
+<template><LayoutNavbar /><slot /><LayoutFooter /></template>
