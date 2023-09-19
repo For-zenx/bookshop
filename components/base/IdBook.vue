@@ -72,31 +72,29 @@ onMounted(() => {
                 </button>
               </div>
               <div class="lg:mt-8 text-lg font-mono">
-                Sinopsis: {{ book.synopsis }}
+                Synopsis: {{ book.synopsis }}
               </div>
               <div class="mt-4 lg:mt-6 font-mono font-bold">
-                Autor: <span class="font-normal">{{ book.author.name }}</span>
+                Author: <span class="font-normal">{{ book.author.name }}</span>
               </div>
               <div class="mt-3 font-mono font-bold">
-                Páginas: <span class="font-normal">{{ book.pages }}</span>
+                Pages: <span class="font-normal">{{ book.pages }}</span>
               </div>
               <div class="mt-3 font-mono font-bold">
-                Género: <span class="font-normal">{{ book.genre }}</span>
+                Genre: <span class="font-normal">{{ book.genre }}</span>
               </div>
               <div class="mt-3 font-mono font-bold">
-                Año: <span class="font-normal">{{ book.year }}</span>
+                Year: <span class="font-normal">{{ book.year }}</span>
               </div>
               <div class="mt-3 font-mono font-bold">
                 ISBN: <span class="font-normal">{{ book.ISBN }}</span>
               </div>
               <div class="mt-4 lg:mt-6 font-mono">
                 <template v-if="book.author.otherBooks.length !== 0">
-                  Libros Relacionados: {{ book.author.otherBooks[0] }}.
+                  Related Books: {{ book.author.otherBooks[0] }}.
                   {{ book.author.otherBooks[1] }}
                 </template>
-                <template v-else>
-                  Libros Relacionados: No hay coincidencias
-                </template>
+                <template v-else> Related Books: No search found </template>
               </div>
               <div class="flex justify-center mt-14 lg:mt-8 lg:justify-end">
                 <nuxt-img

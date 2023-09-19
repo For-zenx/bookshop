@@ -106,7 +106,7 @@ const toggleDropDown = () => {
             class="text-sm row-start-2 ml-2 col-start-4 col-span-8 cursor-pointer"
             @click="router.push(String(book.id)), toggleDropDown()"
           >
-            Sinopsis:
+            Synopsys:
           </div>
           <div
             class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400 line-clamp-3 cursor-pointer"

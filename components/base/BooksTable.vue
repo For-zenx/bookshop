@@ -73,7 +73,7 @@ const filteredBooks = computed(() => {
         </h2>
       </header>
       <div class="mb-6 text-center md:text-start">
-        <div class="pb-1">Busca por rango de páginas</div>
+        <div class="pb-1">Search by page range</div>
         <div class="flex justify-center md:justify-normal space-x-4">
           <p>Min:</p>
           <input
@@ -147,26 +147,24 @@ const filteredBooks = computed(() => {
               class="align-sub line-clamp-1 hover:underline text-sm mt-1 pl-1 cursor-pointer"
               @click="router.push(String(book.id))"
             >
-              Autor: {{ book.author.name }}
+              Author: {{ book.author.name }}
             </p>
             <p
               class="align-sub line-clamp-1 hover:underline text-sm mt-1 pl-1 cursor-pointer"
               @click="router.push(String(book.id))"
             >
-              Género: {{ book.genre }}
+              Genre: {{ book.genre }}
             </p>
             <p
               class="align-sub line-clamp-1 hover:underline text-sm mt-1 italic pl-1 cursor-pointer"
               @click="router.push(String(book.id))"
             >
-              Páginas: {{ book.pages }}
+              Pages: {{ book.pages }}
             </p>
           </div>
         </template>
         <div v-else class="col-span-2 md:col-start-2">
-          <h3 class="text-xl text-center md:text-4xl mt-12">
-            No se han encontrado libros
-          </h3>
+          <h3 class="text-xl text-center md:text-4xl mt-12">Books not found</h3>
           <nuxt-img
             class="-mt-20 md:-mt-28"
             width="550"

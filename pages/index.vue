@@ -15,6 +15,6 @@ definePageMeta({
 </script>
 <template>
   <main class="body">
-    <BaseBooksTable title="Books Section " />
+    <BaseBooksTable title="Books Section" />
   </main>
 </template>

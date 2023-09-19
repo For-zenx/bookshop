@@ -32,10 +32,10 @@ export const useBookStore = defineStore("bookList", {
       if (book) {
         book.isFav = !book.isFav;
       }
-      localStorage.setItem("favs", JSON.stringify(this.bookList));
+      localStorage.setItem("favBooks", JSON.stringify(this.bookList));
     },
     obtainToggleHistory() {
-      const data = localStorage.getItem("favs");
+      const data = localStorage.getItem("favBooks");
       if (data) {
         this.bookList = JSON.parse(data);
       }
