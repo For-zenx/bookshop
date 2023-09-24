@@ -9,10 +9,7 @@ const goToHome = () => {
 </script>
 
 <template>
-  <nav
-    :class="y > 10 ? 'border-b-2 border-slate-800 ' : ''"
-    class="navbar flex justify-between pt-2"
-  >
+  <nav :class="y > 10 ? 'navbar-border' : ''" class="navbar">
     <div class="cursor-pointer" @click="goToHome()">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +17,7 @@ const goToHome = () => {
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="#ffffff"
-        class="w-9 h-9"
+        class="w-9 h-9 text-slate-800"
       >
         <path
           stroke-linecap="round"
@@ -34,3 +31,27 @@ const goToHome = () => {
   </nav>
   <BaseSearchModal />
 </template>
+<style scoped>
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #020617;
+  padding: 4px 8px;
+  color: #d1d5db;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding-left: 8px;
+    padding-right: 12px;
+    padding-top: 0.5rem;
+  }
+}
+.navbar-border {
+  border-bottom: 2px solid #1e293b;
+}
+</style>
