@@ -1,63 +1,16 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useBookStore } from "~/stores/BookStore";
-
 const { title } = defineProps<{ title: string }>();
 
+const router = useRouter();
 const bookStore = useBookStore();
 const { fetchBook, obtainToggleHistory, toggleFav } = bookStore;
-const { bookList } = storeToRefs(bookStore);
-
+const { filteredBooks } = storeToRefs(bookStore);
 await fetchBook();
 
 onMounted(() => {
   obtainToggleHistory();
-});
-
-const router = useRouter();
-
-const minPageInput = ref<number | null>(null);
-const maxPageInput = ref<number | null>(null);
-let maxPagesArray = bookList.value.reduce(
-  (maxPages, item) => Math.max(maxPages, item.pages),
-  0
-);
-const handleMinPageInput = () => {
-  minPageInput.value = Math.max(
-    1,
-    Math.min(maxPagesArray, +minPageInput.value)
-  );
-};
-const handleMaxPageInput = () => {
-  if (maxPageInput.value === null) {
-    return;
-  }
-  maxPageInput.value = Math.max(
-    1,
-    Math.min(maxPagesArray, +maxPageInput.value || maxPagesArray)
-  );
-};
-const filteredBooks = computed(() => {
-  const minPage = minPageInput.value;
-  const maxPage = maxPageInput.value;
-
-  return bookList.value.filter((book) => {
-    const page = book.pages;
-
-    if (minPage && maxPage) {
-      return page >= minPage && page <= maxPage;
-    }
-
-    if (minPage) {
-      return page >= minPage;
-    }
-
-    if (maxPage) {
-      return page <= maxPage;
-    }
-
-    return true;
-  });
 });
 </script>
 <template>
@@ -72,29 +25,7 @@ const filteredBooks = computed(() => {
           {{ title }}
         </h2>
       </header>
-      <div class="mb-6 text-center md:text-start">
-        <div class="pb-1">Search by page range</div>
-        <div class="flex justify-center md:justify-normal space-x-4">
-          <p>Min:</p>
-          <input
-            id="minPageInput"
-            class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500"
-            placeholder="1"
-            type="number"
-            v-model="minPageInput"
-            @input="handleMinPageInput"
-          />
-          <p>Max:</p>
-          <input
-            id="maxPageInput"
-            class="remove-arrow w-9 bg-slate-900 border-b-2 border-slate-500"
-            :placeholder="`${maxPagesArray}`"
-            type="number"
-            v-model="maxPageInput"
-            @input="handleMaxPageInput"
-          />
-        </div>
-      </div>
+      <BaseRangeFilter />
       <section class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
         <template v-if="filteredBooks.length">
           <div
@@ -176,11 +107,3 @@ const filteredBooks = computed(() => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.remove-arrow::-webkit-inner-spin-button,
-.remove-arrow::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-</style>
