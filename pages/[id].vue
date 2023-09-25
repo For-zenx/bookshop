@@ -11,11 +11,15 @@ const bookInfo = books.value?.library.find((book) => {
 
 const headerTitle = bookInfo?.title;
 
-useHead(() => {
-  return {
-    title: headerTitle,
-    meta: [{ property: "og:title", content: headerTitle }],
-  };
+useHead({
+  title: headerTitle,
+  meta: [
+    {
+      hid: "description",
+      name: "description",
+      content: "My custom description",
+    },
+  ],
 });
 </script>
 
