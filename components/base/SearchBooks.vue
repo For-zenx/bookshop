@@ -38,6 +38,7 @@ onUnmounted(() => {
         : 'opacity-80 duration-200  border-gray-500'
     "
     class="border-[2px] rounded-md max-h-[38px] mt-0.5 min-w-[110px] md:min-w-[180px]"
+    :disabled="openModal.isOpenSearchModal"
     @click="openModal.toggleSearchModal()"
   >
     <div class="flex items-center">
