@@ -1,20 +1,56 @@
 <script setup lang="ts">
 import { useBookStore } from "~/stores/BookStore";
+import { onClickOutside } from "@vueuse/core";
 
 const router = useRouter();
 const bookStore = useBookStore();
 const { fetchBook, toggleFav } = bookStore;
 await fetchBook();
 
-const showDropDown = ref(false);
-const toggleDropDown = () => {
-  showDropDown.value = !showDropDown.value;
+const dropDown = ref(false);
+const openDropDown = () => {
+  dropDown.value = true;
 };
+const closeDropDown = () => {
+  dropDown.value = false;
+};
+
+const modal = ref(null);
+onClickOutside(modal, () => {
+  closeDropDown();
+});
 </script>
 <template>
   <div class="relative">
     <button
-      @click="toggleDropDown()"
+      v-if="!dropDown"
+      @click="openDropDown()"
+      :class="
+        bookStore.favCount === 0
+          ? 'cursor-not-allowed opacity-50  duration-200'
+          : 'opacity-100 transition-opacity  duration 200'
+      "
+      class="cursor-pointer hover:bg-slate-800 hover:border-gray-400 hover:rounded-full duration-50"
+      aria-label="Abrir menú desplegable"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="#ffffff"
+        class="w-11 h-11 p-1"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9"
+        />
+      </svg>
+    </button>
+    <button
+      v-else
+      @click="closeDropDown()"
       :class="
         bookStore.favCount === 0
           ? 'cursor-not-allowed opacity-50  duration-200'
@@ -39,14 +75,14 @@ const toggleDropDown = () => {
       </svg>
     </button>
     <span
-      v-if="!showDropDown"
+      v-if="!dropDown"
       class="fixed"
       :class="bookStore.favCount === 0 ? 'opacity-80' : ''"
     >
       {{ bookStore.favCount }}
     </span>
     <Transition name="slide-fade">
-      <div v-if="showDropDown" class="flex justify-end">
+      <div v-if="dropDown" class="flex justify-end" ref="modal">
         <div
           class="fixed rounded-lg bg-slate-700 shadow-lg min-w-screen sm:min-w-[380px] sm:max-w-[380px] grid overflow-y-scroll min-h-[100px] max-h-[470px]"
         >
@@ -93,11 +129,11 @@ const toggleDropDown = () => {
               :alt="book.title"
               width="80"
               height="80"
-              @click="router.push(String(book.id)), toggleDropDown()"
+              @click="router.push(String(book.id)), closeDropDown()"
             />
             <div
               class="col-span-8 ml-1 line-clamp-1 p-1 font-bold cursor-pointer"
-              @click="router.push(String(book.id)), toggleDropDown()"
+              @click="router.push(String(book.id)), closeDropDown()"
             >
               {{ book.title }}
             </div>
@@ -122,13 +158,13 @@ const toggleDropDown = () => {
             </button>
             <div
               class="text-sm row-start-2 ml-2 col-start-4 col-span-8 cursor-pointer"
-              @click="router.push(String(book.id)), toggleDropDown()"
+              @click="router.push(String(book.id)), closeDropDown()"
             >
               Synopsys:
             </div>
             <div
               class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400 line-clamp-3 cursor-pointer"
-              @click="router.push(String(book.id)), toggleDropDown()"
+              @click="router.push(String(book.id)), closeDropDown()"
             >
               {{ book.synopsis }}
             </div>
@@ -144,7 +180,7 @@ const toggleDropDown = () => {
 }
 
 .slide-fade-leave-active {
-  transition: all 0s;
+  transition: all 0.1s;
 }
 
 .slide-fade-enter-from,
