@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useBookStore } from "~/stores/BookStore";
-import { onClickOutside } from "@vueuse/core";
 
 const router = useRouter();
 const bookStore = useBookStore();
@@ -39,27 +38,42 @@ const toggleDropDown = () => {
         />
       </svg>
     </button>
+    <span
+      v-if="!showDropDown"
+      class="fixed"
+      :class="bookStore.favCount === 0 ? 'opacity-80' : ''"
+    >
+      {{ bookStore.favCount }}
+    </span>
     <Transition name="slide-fade">
       <div v-if="showDropDown" class="flex justify-end">
         <div
           class="fixed rounded-lg bg-slate-700 shadow-lg min-w-screen sm:min-w-[380px] sm:max-w-[380px] grid overflow-y-scroll min-h-[100px] max-h-[470px]"
         >
-          <div class="sticky top-0 bg-slate-700 z-10 p-2 flex">
-            Reading list
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6 ml-2"
+          <div class="sticky top-0 bg-slate-700 z-10 p-2 flex justify-between">
+            <div class="flex">
+              Reading list
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 ml-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                />
+              </svg>
+            </div>
+            <span
+              class="mr-2 underline font-bold"
+              :class="bookStore.favCount === 0"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-              />
-            </svg>
+              {{ bookStore.favCount }}
+            </span>
           </div>
           <div
             v-if="bookStore.favs.length === 0"
@@ -122,14 +136,6 @@ const toggleDropDown = () => {
         </div>
       </div>
     </Transition>
-    <span
-      :class="[
-        showDropDown ? 'underline mt-2 ml-1 font-bold' : '',
-        bookStore.favCount === 0 ? 'opacity-80' : '',
-      ]"
-      class="fixed"
-      >{{ bookStore.favCount }}</span
-    >
   </div>
 </template>
 <style scoped>
