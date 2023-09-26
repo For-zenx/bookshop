@@ -39,84 +39,89 @@ const toggleDropDown = () => {
         />
       </svg>
     </button>
-    <div v-if="showDropDown" class="flex justify-end">
-      <div
-        class="fixed rounded-lg bg-slate-700 shadow-lg min-w-screen sm:min-w-[380px] sm:max-w-[380px] grid overflow-y-scroll min-h-[100px] max-h-[470px]"
-      >
-        <div class="sticky top-0 bg-slate-700 z-10 p-2 flex">
-          Reading list
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 ml-2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-            />
-          </svg>
-        </div>
-        <div v-if="bookStore.favs.length === 0" class="text-center pb-3 mx-12">
-          Your reading list is empty.
-        </div>
+    <Transition name="slide-fade">
+      <div v-if="showDropDown" class="flex justify-end">
         <div
-          v-else
-          v-for="book in bookStore.favs"
-          :key="book.id"
-          class="p-2 border-b-[1px] border-gray-500 grid grid-cols-12 grid-rows-4 hover:bg-slate-600 hover:bg-opacity-30"
+          class="fixed rounded-lg bg-slate-700 shadow-lg min-w-screen sm:min-w-[380px] sm:max-w-[380px] grid overflow-y-scroll min-h-[100px] max-h-[470px]"
         >
-          <nuxt-img
-            class="col-span-3 row-span-4 min-h-[130px] max-h-[130px] cursor-pointer"
-            :src="book.cover"
-            :alt="book.title"
-            width="80"
-            height="80"
-            @click="router.push(String(book.id)), toggleDropDown()"
-          />
-          <div
-            class="col-span-8 ml-1 line-clamp-1 p-1 font-bold cursor-pointer"
-            @click="router.push(String(book.id)), toggleDropDown()"
-          >
-            {{ book.title }}
-          </div>
-          <button
-            @click="bookStore.toggleFav(book.id)"
-            class="pl-0.5 cursor-pointer hover:bg-slate-600 hover:border-gray-400 hover:rounded-full duration-50"
-          >
+          <div class="sticky top-0 bg-slate-700 z-10 p-2 flex">
+            Reading list
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="w-6 h-6 ml-2"
             >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
               />
             </svg>
-          </button>
-          <div
-            class="text-sm row-start-2 ml-2 col-start-4 col-span-8 cursor-pointer"
-            @click="router.push(String(book.id)), toggleDropDown()"
-          >
-            Synopsys:
           </div>
           <div
-            class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400 line-clamp-3 cursor-pointer"
-            @click="router.push(String(book.id)), toggleDropDown()"
+            v-if="bookStore.favs.length === 0"
+            class="text-center pb-3 mx-12"
           >
-            {{ book.synopsis }}
+            Your reading list is empty.
+          </div>
+          <div
+            v-else
+            v-for="book in bookStore.favs"
+            :key="book.id"
+            class="p-2 border-b-[1px] border-gray-500 grid grid-cols-12 grid-rows-4 hover:bg-slate-600 hover:bg-opacity-30"
+          >
+            <nuxt-img
+              class="col-span-3 row-span-4 min-h-[130px] max-h-[130px] cursor-pointer"
+              :src="book.cover"
+              :alt="book.title"
+              width="80"
+              height="80"
+              @click="router.push(String(book.id)), toggleDropDown()"
+            />
+            <div
+              class="col-span-8 ml-1 line-clamp-1 p-1 font-bold cursor-pointer"
+              @click="router.push(String(book.id)), toggleDropDown()"
+            >
+              {{ book.title }}
+            </div>
+            <button
+              @click="bookStore.toggleFav(book.id)"
+              class="pl-0.5 cursor-pointer hover:bg-slate-600 hover:border-gray-400 hover:rounded-full duration-50"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 3l1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 011.743-1.342 48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664L19.5 19.5"
+                />
+              </svg>
+            </button>
+            <div
+              class="text-sm row-start-2 ml-2 col-start-4 col-span-8 cursor-pointer"
+              @click="router.push(String(book.id)), toggleDropDown()"
+            >
+              Synopsys:
+            </div>
+            <div
+              class="ml-2 row-start-3 col-start-4 col-span-8 row-span-2 text-sm text-gray-400 line-clamp-3 cursor-pointer"
+              @click="router.push(String(book.id)), toggleDropDown()"
+            >
+              {{ book.synopsis }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Transition>
     <span
       :class="[
         showDropDown ? 'underline mt-2 ml-1 font-bold' : '',
@@ -127,3 +132,17 @@ const toggleDropDown = () => {
     >
   </div>
 </template>
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.15s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0s;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
+}
+</style>
