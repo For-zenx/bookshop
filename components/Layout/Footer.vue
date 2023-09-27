@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useMouseInElement } from "@vueuse/core";
 import { useWindowScroll } from "@vueuse/core";
-const { y } = useWindowScroll();
 const target = ref(null);
 const { isOutside } = useMouseInElement(target);
 </script>

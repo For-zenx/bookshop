@@ -22,7 +22,7 @@ export default defineNuxtConfig({
 
   image: {
     inject: true,
-    quality: 1,
+    quality: 0,
     format: ["avif", "webp", "svg", "png", "jpg"],
     screens: {
       xs: 320,

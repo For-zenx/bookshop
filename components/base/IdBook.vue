@@ -43,16 +43,18 @@ onMounted(() => {
               :alt="book.title"
               height="300"
               width="350"
-              class="min-h-[420px] max-h-[420px] lg:min-h-[480px] lg:max-h-[480px] mr-12"
+              class="min-h-[360px] max-h-[360px] lg:min-h-[480px] lg:max-h-[480px] mr-12"
             />
             <div class="grid grid-rows-9">
-              <div class="flex justify-between mt-8 lg:mt-0">
+              <div
+                class="flex justify-between mb-2 mt-8 lg:mt-0 md:border-b-[1px] border-gray-700"
+              >
                 <h2 class="uppercase text-gray-300 text-2xl font-bold">
                   {{ book.title }}
                 </h2>
                 <button
                   aria-label="Guardar"
-                  class="p-1 mb-4 transition-colors duration-200"
+                  class="p-1 mb-8"
                   @click="toggleFav(book.id)"
                 >
                   <svg
@@ -71,25 +73,26 @@ onMounted(() => {
                   </svg>
                 </button>
               </div>
-              <div class="lg:mt-8 text-lg font-mono">
-                Synopsis: {{ book.synopsis }}
+              <div class="lg:mt-8 text-lg font-bold">
+                Synopsis:
+                <span class="font-normal">{{ book.synopsis }}</span>
               </div>
-              <div class="mt-4 lg:mt-6 font-mono font-bold">
+              <div class="mt-4 lg:mt-6 font-bold">
                 Author: <span class="font-normal">{{ book.author.name }}</span>
               </div>
-              <div class="mt-3 font-mono font-bold">
+              <div class="mt-3 font-bold">
                 Pages: <span class="font-normal">{{ book.pages }}</span>
               </div>
-              <div class="mt-3 font-mono font-bold">
+              <div class="mt-3 font-bold">
                 Genre: <span class="font-normal">{{ book.genre }}</span>
               </div>
-              <div class="mt-3 font-mono font-bold">
+              <div class="mt-3 font-bold">
                 Year: <span class="font-normal">{{ book.year }}</span>
               </div>
-              <div class="mt-3 font-mono font-bold">
+              <div class="mt-3 font-bold">
                 ISBN: <span class="font-normal">{{ book.ISBN }}</span>
               </div>
-              <div class="mt-4 lg:mt-6 font-mono">
+              <div class="mt-4 lg:mt-6">
                 <template v-if="book.author.otherBooks.length !== 0">
                   Related Books: {{ book.author.otherBooks[0] }}.
                   {{ book.author.otherBooks[1] }}
