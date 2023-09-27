@@ -4,7 +4,7 @@ import { onClickOutside } from "@vueuse/core";
 
 const router = useRouter();
 const bookStore = useBookStore();
-const { fetchBook, toggleFav } = bookStore;
+const { fetchBook } = bookStore;
 await fetchBook();
 
 const dropDown = ref(false);

@@ -4,6 +4,10 @@ import { useBookStore } from "~/stores/BookStore";
 import { onClickOutside } from "@vueuse/core";
 import { breakpointsTailwind } from "@vueuse/core";
 import { useBreakpoints } from "@vueuse/core";
+import { useMouseInElement } from "@vueuse/core";
+
+const target = ref(null);
+const { isOutside } = useMouseInElement(target);
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const md = breakpoints.smallerOrEqual("md");

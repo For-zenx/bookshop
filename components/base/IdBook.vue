@@ -38,7 +38,7 @@ onMounted(() => {
           <div
             class="grid grid-cols-1 max-w-lg px-4 lg:max-w-max lg:flex lg:px-0"
           >
-            <img
+            <nuxt-img
               :src="book.cover"
               :alt="book.title"
               height="300"
@@ -47,7 +47,7 @@ onMounted(() => {
             />
             <div class="grid grid-rows-9">
               <div
-                class="flex justify-between mb-2 mt-8 lg:mt-0 md:border-b-[1px] border-gray-700"
+                class="flex justify-between mb-2 mt-8 lg:mt-0 lg:border-b-[1px] border-gray-700"
               >
                 <h2 class="uppercase text-gray-300 text-2xl font-bold">
                   {{ book.title }}
