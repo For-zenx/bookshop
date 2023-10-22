@@ -5,6 +5,7 @@ import { useBookStore } from "~/stores/BookStore";
 const bookStore = useBookStore();
 const { fetchBook, handleMinPageInput, handleMaxPageInput, maxPagesArray } =
   bookStore;
+
 const { minPageInput, maxPageInput } = storeToRefs(bookStore);
 
 await fetchBook();

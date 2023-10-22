@@ -39,12 +39,12 @@ onMounted(() => {
               height="300"
               width="300"
               :alt="book.title"
-              @click="router.push(String(book.id))"
+              @click="router.push(`/book/${book.id}`)"
             />
             <div class="flex justify-between mt-1">
               <h3
                 class="font-semibold line-clamp-1 hover:underline mt-1 pl-1 cursor-pointer"
-                @click="router.push(String(book.id))"
+                @click="router.push(`/book/${book.id}`)"
               >
                 {{ book.title }}
               </h3>
@@ -76,19 +76,19 @@ onMounted(() => {
             </div>
             <p
               class="align-sub line-clamp-1 hover:underline text-sm mt-1 pl-1 cursor-pointer"
-              @click="router.push(String(book.id))"
+              @click="router.push(`/book/${book.id}`)"
             >
               Author: {{ book.author.name }}
             </p>
             <p
               class="align-sub line-clamp-1 hover:underline text-sm mt-1 pl-1 cursor-pointer"
-              @click="router.push(String(book.id))"
+              @click="router.push(`/book/${book.id}`)"
             >
               Genre: {{ book.genre }}
             </p>
             <p
               class="align-sub line-clamp-1 hover:underline text-sm mt-1 italic pl-1 cursor-pointer"
-              @click="router.push(String(book.id))"
+              @click="router.push(`/book/${book.id}`)"
             >
               Pages: {{ book.pages }}
             </p>

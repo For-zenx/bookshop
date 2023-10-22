@@ -104,7 +104,9 @@ const filteredBooks = computed(() => {
           <div
             v-for="book in filteredBooks"
             class="min-h-[47px] items-center my-1 rounded-md px-4 bg-slate-700 cursor-pointer hover:bg-slate-500 hover:underline grid grid-cols-12"
-            @click="router.push(String(book.id)), openModal.toggleSearchModal()"
+            @click="
+              router.push(`/book/${book.id}`), openModal.toggleSearchModal()
+            "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

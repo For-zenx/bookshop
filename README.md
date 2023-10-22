@@ -48,7 +48,7 @@ TailwindCSS played a fundamental role in the creation of Bookshop Online by prov
 
 ### VueUse
 
-VueUse was essential to improving the performance and functionality of reusable components in the application. We used the following features:
+VueUse was essential to improving the performance and functionality of reusable components in the application. The following features were used:
 
 - onClickOutside: This function was used to manage the closing of modals when users click outside of them, thus improving the user experience.
 

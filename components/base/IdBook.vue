@@ -12,8 +12,8 @@ const router = useRouter();
 
 const isFirstPage = () => Number(id) === 1;
 const isLastPage = () => Number(id) === bookStore.bookList.length;
-const goBack = () => !isFirstPage() && router.push(`/${Number(id) - 1}`);
-const goForward = () => !isLastPage() && router.push(`/${Number(id) + 1}`);
+const goBack = () => !isFirstPage() && router.push(`/book/${Number(id) - 1}`);
+const goForward = () => !isLastPage() && router.push(`/book/${Number(id) + 1}`);
 
 onMounted(() => {
   obtainToggleHistory();
@@ -23,7 +23,7 @@ onMounted(() => {
 <template>
   <section class="flex justify-center pb-12 md:pb-0">
     <div
-      class="max-w-sm lg:max-w-5xl px-2 md:px-4 lg:px-8 pt-6 pb-12 mt-12 rounded-lg bg-slate-900 mx-2"
+      class="max-w-sm lg:min-w-5xl lg:max-w-5xl px-2 md:px-4 lg:px-8 pt-6 pb-12 mt-12 rounded-lg bg-slate-900 mx-2"
     >
       <nuxt-img
         src="/svg/arrow-return-left.svg"

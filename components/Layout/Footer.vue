@@ -55,13 +55,7 @@ const { isOutside } = useMouseInElement(target);
   display: flex;
   justify-content: flex-end;
 }
-@media (min-width: 768px) {
-  .footer {
-    position: sticky;
-    padding-left: 6px;
-    padding-right: 6px;
-  }
-}
+
 .github-link {
   padding-left: 12px;
   padding-right: 12px;
