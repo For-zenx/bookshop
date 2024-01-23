@@ -11,6 +11,13 @@ const openModal = useOpenModal();
 const searchButton = ref(null);
 const { isOutside: isMouseOutside } = useMouseInElement(searchButton);
 
+onMounted(() => {
+  window.addEventListener("keydown", handleKeyDown);
+});
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyDown);
+});
+
 const handleKeyDown = (event: KeyboardEvent) => {
   if (event.key === "Escape" && openModal.isOpenSearchModal) {
     openModal.toggleSearchModal();
@@ -19,13 +26,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
     openModal.toggleSearchModal();
   }
 };
-
-onMounted(() => {
-  window.addEventListener("keydown", handleKeyDown);
-});
-onUnmounted(() => {
-  window.removeEventListener("keydown", handleKeyDown);
-});
 </script>
 
 <template>

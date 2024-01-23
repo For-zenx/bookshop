@@ -6,18 +6,16 @@ import { breakpointsTailwind } from "@vueuse/core";
 import { useBreakpoints } from "@vueuse/core";
 import { useMouseInElement } from "@vueuse/core";
 
+const bookStore = useBookStore();
 const target = ref(null);
+const { fetchBook } = bookStore;
 const { isOutside } = useMouseInElement(target);
-
 const breakpoints = useBreakpoints(breakpointsTailwind);
 const md = breakpoints.smallerOrEqual("md");
-
 const router = useRouter();
-const bookStore = useBookStore();
-const { fetchBook } = bookStore;
 await fetchBook();
-
 const openModal = useOpenModal();
+
 const modal = ref(null);
 onClickOutside(modal, () => {
   openModal.toggleSearchModal();
